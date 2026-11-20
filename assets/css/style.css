@@ -96,7 +96,7 @@ svg{flex:none}
   color:#fff;position:sticky;top:0;z-index:50;
   box-shadow:0 2px 16px rgba(7,63,54,.28);
 }
-.site-header .wrap{display:flex;align-items:center;gap:16px;min-height:64px}
+.site-header .wrap{display:flex;align-items:center;gap:16px;min-height:64px;max-width:1360px}
 .brand{
   display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;
   font-weight:800;font-size:1.18rem;letter-spacing:-.02em;white-space:nowrap;
@@ -109,10 +109,10 @@ svg{flex:none}
 }
 .brand-mark svg{width:22px;height:22px}
 .brand span{color:var(--mint)}
-.site-nav{margin-left:auto;display:flex;gap:2px;flex-wrap:wrap;align-items:center}
+.site-nav{margin-left:auto;display:flex;gap:2px;flex-wrap:nowrap;align-items:center;white-space:nowrap}
 .site-nav a{
-  color:#d9efe9;text-decoration:none;font-size:.92rem;font-weight:600;
-  padding:8px 12px;border-radius:999px;transition:background .15s ease,color .15s ease;
+  color:#d9efe9;text-decoration:none;font-size:.88rem;font-weight:600;
+  padding:8px 10px;border-radius:999px;transition:background .15s ease,color .15s ease;
 }
 .site-nav a:hover{color:#fff;background:rgba(255,255,255,.16);text-decoration:none}
 .site-nav a.active{color:var(--teal-deep);background:#fff}
@@ -121,7 +121,7 @@ svg{flex:none}
   border:1px solid rgba(255,255,255,.45);color:#fff;border-radius:10px;
   padding:8px 14px;cursor:pointer;font-weight:700;font-size:.9rem;
 }
-@media (max-width:900px){
+@media (max-width:1150px){
   .nav-toggle{display:block}
   .site-nav{display:none;width:100%;flex-direction:column;align-items:stretch;padding:4px 0 14px;gap:4px}
   .site-nav.open{display:flex}
