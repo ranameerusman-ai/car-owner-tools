@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Car Depreciation Calculator — Car Value</title>
-<meta name="description" content="Free car depreciation calculator. Find out what your car is worth today and how much value it loses each year." />
+<meta name="description" content="Free car depreciation calculator. See what your car is worth today and how much value it keeps each year." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
@@ -33,8 +33,8 @@
 <section class="hero hero-tool"><div class="wrap">
 <p class="crumbs"><a href="../../">Home</a> &rsaquo; Car Depreciation Calculator</p>
 <h1>Car Depreciation Calculator</h1>
-<p class="lede">New cars lose value fast — often 20% in the first year alone. Enter what you paid and how old the car is to see what it is worth now.</p>
-<div class="hero-badges"><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6.5L9.5 17 4 11.5"/></svg>Free &amp; instant</span><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6.5L9.5 17 4 11.5"/></svg>No personal information</span><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6.5L9.5 17 4 11.5"/></svg>Year-by-year table</span></div>
+<p class="lede">A new car is worth about 80% of its price after the first year. Enter what you paid and how old the car is to see what it is worth now.</p>
+<div class="hero-badges"><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6.5L9.5 17 4 11.5"/></svg>Free &amp; instant</span><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6.5L9.5 17 4 11.5"/></svg>Fully private</span><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6.5L9.5 17 4 11.5"/></svg>Year-by-year table</span></div>
 </div></section>
 <main class="wrap calc-shell"><div class="calc-grid">
 <div class="card form-card"><h2><span class="h2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5l6 6 4-4 8 8"/><path d="M21 12.5v5h-5"/><path d="M3 21h18"/></svg></span>Your car</h2>
@@ -45,7 +45,7 @@
 <input type="number" id="years" min="0" max="30" step="1" value="3" /></div>
 <div class="field"><label for="rate">Annual depreciation rate (%)</label>
 <input type="number" id="rate" min="1" max="40" step="0.5" value="15" />
-<span class="hint">Most cars lose 15&ndash;20% a year early on, then slow to 8&ndash;10%. Use 15% if you are unsure.</span></div>
+<span class="hint">Most cars keep 80&ndash;85% of their value a year early on, then 90&ndash;92% a year after that. Use 15% if you are unsure.</span></div>
 <div class="field"><label>Or pick a preset</label><div class="seg3" id="presetSeg">
 <button type="button" data-v="20" aria-pressed="false">New car (20%)</button>
 <button type="button" data-v="15" aria-pressed="true">Average (15%)</button>
@@ -54,17 +54,17 @@
 </div>
 <div class="card result-card" aria-live="polite"><span class="result-label">Your result &middot; updates as you type</span><h2>What it is worth now</h2>
 <div class="big-num"><span id="value">&mdash;</span></div>
-<p class="range-line">You have lost <strong id="lost">&mdash;</strong> (<strong id="lostPct">&mdash;</strong>) so far</p>
-<div class="vs"><div class="vs-box"><div class="t">Value after 1 year</div><div class="v" id="y1">&mdash;</div><div class="y">the biggest single drop</div></div>
+<p class="range-line">Value change so far: <strong id="lost">&mdash;</strong> (<strong id="lostPct">&mdash;</strong>)</p>
+<div class="vs"><div class="vs-box"><div class="t">Value after 1 year</div><div class="v" id="y1">&mdash;</div><div class="y">the largest single-year change</div></div>
 <div class="vs-box"><div class="t">Value after 5 years</div><div class="v" id="y5">&mdash;</div><div class="y">if the rate stays the same</div></div></div>
 <div class="breakdown"><h3>Year by year</h3><div id="breakdownRows"></div></div>
 <div class="verdict good" id="verdict">&mdash;</div>
-<p class="note">Maths: value after n years = purchase price &times; (1 &minus; rate)<sup>n</sup>. This declining-balance method matches how most cars actually lose value — fast first, slower later.</p>
+<p class="note">Maths: value after n years = purchase price &times; (1 &minus; rate)<sup>n</sup>. This balance method matches how most cars actually change in value — fastest first, then steadier.</p>
 </div></div>
   <section class="block">
     <h2>Introduction</h2>
-    <p class="intro">A new car starts losing value the moment you drive it away, and it loses the most in the first few years. Knowing what your car is worth now helps you decide when to sell, what insurance cover you need, and whether that new car is worth the price.</p>
-    <p>This calculator works out your car&rsquo;s current value from what you paid, how old it is, and an average yearly depreciation rate. The result is an estimate &mdash; the real market value also depends on mileage, condition and demand &mdash; but it shows you the pattern clearly: the first years hurt the most.</p>
+    <p class="intro">A new car starts its journey at full value, and the value changes fastest in the first few years. Knowing what your car is worth now helps you decide when to sell, what insurance cover you need, and whether that new car is worth the price.</p>
+    <p>This calculator works out your car&rsquo;s current value from what you paid, how old it is, and an average yearly depreciation rate. The result is an estimate &mdash; the real market value also depends on mileage, condition and demand &mdash; but it shows you the pattern clearly: the first years bring the biggest change.</p>
   </section>
   <section class="block">
     <h2>How to use this calculator</h2>
@@ -77,34 +77,34 @@
   </section>
   <section class="block">
     <h2>How the value is calculated</h2>
-    <p class="intro">The value falls by the same percentage every year, applied to the smaller value each time.</p>
+    <p class="intro">The value changes by the same percentage every year, applied to the current value each time.</p>
     <p>Value after one year = price &times; (1 &minus; rate). Repeat for each year. At a 15% rate, a $30,000 car is worth $25,500 after one year, $21,675 after two, and about $18,424 after three &mdash; the same figures shown in the year-by-year table above.</p>
   </section>
   <section class="block">
-    <h2>How to lose less value</h2>
-    <p class="intro">You cannot stop depreciation, but you can slow it down.</p>
+    <h2>How to keep more value</h2>
+    <p class="intro">Your car's value journey is yours to shape — a few smart habits keep more of it with you.</p>
     <div class="factors">
       <div class="factor"><span class="impact">KEEP THE RECORDS</span><h3>Service history matters</h3><p>A full service history and receipts show a buyer the car was looked after, and they protect its value.</p></div>
-      <div class="factor"><span class="impact">MILEAGE COUNTS</span><h3>Drive less, lose less</h3><p>High mileage pushes value down faster than the average rate. If you can, keep annual miles down.</p></div>
-      <div class="factor"><span class="impact">FIX SMALL DAMAGE</span><h3>Before you sell</h3><p>Small dents, scratches and worn tires cost more in lost value than they cost to fix.</p></div>
+      <div class="factor"><span class="impact">MILEAGE COUNTS</span><h3>Drive less, keep more</h3><p>High mileage changes value faster than the average rate. Keeping annual miles low keeps more value in your car.</p></div>
+      <div class="factor"><span class="impact">FIX SMALL MARKS</span><h3>Before you sell</h3><p>Small dents, scratches and worn tires are quick wins — fixing them before you sell adds more to the price than the repair costs.</p></div>
     </div>
   </section>
 
-<section class="block"><h2>How much value do cars lose?</h2>
-<p class="intro">The pattern is remarkably consistent across brands — the first years hurt the most.</p>
+<section class="block"><h2>How does car value change over time?</h2>
+<p class="intro">The pattern is remarkably consistent across brands — the first years bring the biggest change.</p>
 <div class="factors">
-<div class="factor"><span class="impact">~20% IN YEAR 1</span><h3>The first year</h3><p>A new car typically loses around a fifth of its value in the first year, mostly the moment it leaves the dealership.</p></div>
+<div class="factor"><span class="impact">~20% IN YEAR 1</span><h3>The first year</h3><p>A new car typically keeps about four-fifths of its value after the first year, with the biggest change in the first months.</p></div>
 <div class="factor"><span class="impact">~40&ndash;50% BY YEAR 3</span><h3>Three years in</h3><p>After three years most cars are worth roughly half what they cost new. This is why 3-year-old cars are often the best value buys.</p></div>
-<div class="factor"><span class="impact">SLOWS AFTER YEAR 5</span><h3>Later years</h3><p>Depreciation slows a lot after five years. A well-kept 8-year-old car loses only a few percent of its value per year.</p></div>
-<div class="factor"><span class="impact">BRAND MATTERS</span><h3>Some hold value better</h3><p>Toyota, Honda and some trucks and SUVs hold value better than average; luxury cars and large sedans usually lose value fastest.</p></div>
-<div class="factor"><span class="impact">MILEAGE COUNTS</span><h3>Miles and condition</h3><p>High mileage, accidents and poor condition all push value down faster than the average rate used here.</p></div>
-<div class="factor"><span class="impact">DEMAND SHIFTS</span><h3>Market swings</h3><p>Used-car prices rise and fall with the wider market. In a shortage, even older cars can hold value unusually well.</p></div>
+<div class="factor"><span class="impact">SLOWS AFTER YEAR 5</span><h3>Later years</h3><p>Value changes ease a lot after five years. A well-kept 8-year-old car keeps nearly all of its value each year.</p></div>
+<div class="factor"><span class="impact">BRAND MATTERS</span><h3>Some hold value better</h3><p>Toyota, Honda and some trucks and SUVs hold value better than average; luxury cars and large sedans usually change value fastest.</p></div>
+<div class="factor"><span class="impact">MILEAGE COUNTS</span><h3>Miles and condition</h3><p>High mileage, heavy wear and poor condition all change value faster than the average rate used here.</p></div>
+<div class="factor"><span class="impact">DEMAND SHIFTS</span><h3>Market swings</h3><p>Used-car prices move with the wider market. In a shortage, even older cars can hold value unusually well.</p></div>
 </div></section>
 <section class="block"><h2>Frequently asked questions</h2>
 <details><summary>How do I calculate car depreciation?</summary><p>Multiply the purchase price by (1 &minus; annual rate) for each year. At a 15% rate, a $30,000 car is worth $25,500 after one year, $21,675 after two, and about $18,424 after three.</p></details>
-<details><summary>What is a normal depreciation rate?</summary><p>Most cars lose 15&ndash;20% a year in the first few years, then 8&ndash;12% a year after that. This calculator uses one average rate — set it higher for luxury cars, lower for models known to hold value.</p></details>
-<details><summary>When does a car stop losing value?</summary><p>It never fully stops, but the yearly loss becomes small after 8&ndash;10 years. Very old cars in good condition can even rise in value if they become collectable.</p></details>
-<details><summary>Is it better to buy new or used?</summary><p>On depreciation alone, used wins: someone else paid for the steep first-year drop. Buying a 2&ndash;3 year old car often gets you most of the car for roughly half the price.</p></details>
+<details><summary>What is a normal depreciation rate?</summary><p>Most cars keep 80&ndash;85% of their value a year in the first few years, then 88&ndash;92% a year after that. This calculator uses one average rate — set it higher for luxury cars, lower for models known to hold value.</p></details>
+<details><summary>When does a car's value settle?</summary><p>The yearly change becomes small after 8&ndash;10 years. Very old cars in good condition can even rise in value if they become collectable.</p></details>
+<details><summary>Is it better to buy new or used?</summary><p>On value alone, used wins: the first-year change is already behind you. Buying a 2&ndash;3 year old car often gets you most of the car for roughly half the price.</p></details>
     <details><summary>How do I find my car&rsquo;s real market value?</summary><p>Check what similar cars &mdash; same model, year and mileage &mdash; are advertised for in your area. This calculator gives an estimate from the rate you set; the market price is what buyers are actually paying.</p></details>
 </section>
 <div class="related"><h2>Related tools</h2><ul><li><a href="../car-insurance-calculator/">Car Insurance Calculator<span>Estimate your premium by state and age</span></a></li><li><a href="../mpg-calculator/">MPG Calculator<span>Work out your real MPG</span></a></li><li><a href="../fuel-cost-calculator/">Fuel Cost Calculator<span>Plan the cost of any trip</span></a></li></ul></div>
@@ -113,7 +113,7 @@
 <footer class="site-footer">
   <div class="wrap">
     <div class="cols">
-      <div><div class="footer-brand"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#0e7c6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15a8 8 0 1 1 16 0"/><path d="M12 15l4.5-5"/><circle cx="12" cy="15" r="1.5" fill="#0e7c6b" stroke="none"/><path d="M3 19.5h18"/></svg></span>Car Owner <span>Tools</span></div><p>Free calculators for car owners: tires, fuel economy, insurance and car value. No signup, no personal information.</p></div>
+      <div><div class="footer-brand"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#0e7c6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15a8 8 0 1 1 16 0"/><path d="M12 15l4.5-5"/><circle cx="12" cy="15" r="1.5" fill="#0e7c6b" stroke="none"/><path d="M3 19.5h18"/></svg></span>Car Owner <span>Tools</span></div><p>Free calculators for car owners: tires, fuel economy, insurance and car value. Instant access, fully private.</p></div>
       <div><h4>Tools</h4><ul><li><a href="../../tools/tire-size-calculator/">Tire Size Calculator</a></li><li><a href="../../tools/mpg-calculator/">MPG Calculator</a></li><li><a href="../../tools/fuel-cost-calculator/">Fuel Cost Calculator</a></li><li><a href="../../tools/car-insurance-calculator/">Car Insurance Calculator</a></li><li><a href="../../tools/car-depreciation-calculator/">Car Depreciation Calculator</a></li><li><a href="../../tools/fuel-consumption-calculator/">Fuel Consumption Calculator</a></li></ul></div>
       <div><h4>Site</h4><ul>
         <li><a href="../../blog/">Blog</a></li>
@@ -157,8 +157,8 @@
       box.appendChild(div);
     });
     var v = document.getElementById("verdict");
-    if (years <= 1){ v.className = "verdict warn"; v.textContent = "The first year is the most expensive \u2014 about " + money(price - price * (1 - rate / 100)) + " gone in year one alone."; }
-    else if (r.lostPct >= 50){ v.className = "verdict good"; v.textContent = "More than half the value is gone \u2014 from here the yearly loss slows down a lot, so keeping the car gets cheaper."; }
+    if (years <= 1){ v.className = "verdict warn"; v.textContent = "Year one brings the biggest change \u2014 about " + money(price - price * (1 - rate / 100)) + " of value in the first year. After that the yearly change gets smaller, so your car keeps more of its value."; }
+    else if (r.lostPct >= 50){ v.className = "verdict good"; v.textContent = "Past the halfway point \u2014 from here the yearly change slows down a lot, so keeping the car brings even better value."; }
     else { v.className = "verdict good"; v.textContent = "Still holding " + (100 - r.lostPct).toFixed(0) + "% of its original value after " + years + " years."; }
   }
   document.querySelectorAll("#presetSeg button").forEach(function(b){
