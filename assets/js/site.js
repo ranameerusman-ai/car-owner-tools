@@ -6,8 +6,10 @@
   var toggle = document.querySelector(".nav-toggle");
   var nav = document.querySelector(".site-nav");
   if (toggle && nav) {
+    toggle.setAttribute("aria-expanded", "false");
     toggle.addEventListener("click", function () {
-      nav.classList.toggle("open");
+      var open = nav.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
     });
   }
 
@@ -27,6 +29,22 @@
       });
       if (empty) empty.style.display = shown === 0 ? "" : "none";
     });
+  }
+
+  /* Table scroll cue: show the "swipe" hint only when a table is wider than its card */
+  function checkTableScroll() {
+    var wraps = document.querySelectorAll(".table-scroll");
+    for (var i = 0; i < wraps.length; i++) {
+      var card = wraps[i].closest(".table-card");
+      if (card) {
+        card.classList.toggle("is-scrollable", wraps[i].scrollWidth > wraps[i].clientWidth + 1);
+      }
+    }
+  }
+  if (document.querySelector(".table-scroll")) {
+    checkTableScroll();
+    window.addEventListener("resize", checkTableScroll);
+    window.addEventListener("orientationchange", checkTableScroll);
   }
 
   /* Footer year */
