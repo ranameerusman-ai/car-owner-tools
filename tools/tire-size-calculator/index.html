@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tire Size Calculator — Compare Tire Sizes &amp; Speed</title>
+<meta name="description" content="Free tire size calculator. Compare old vs new tire sizes: diameter, circumference, speedometer difference and revs per mile — before you buy new tires." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../assets/css/style.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Tire Size Calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web browser",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Compare old and new tire sizes: diameter, circumference, speedometer difference and revs per mile."
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#0e7c6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15a8 8 0 1 1 16 0"/><path d="M12 15l4.5-5"/><circle cx="12" cy="15" r="1.5" fill="#0e7c6b" stroke="none"/><path d="M3 19.5h18"/></svg></span>Car Owner <span>Tools</span></a>
+    <button class="nav-toggle" type="button" aria-label="Menu">Menu</button>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="../../">Home</a>
+      <a href="../tire-size-calculator/" class="active">Tire Size</a>
+      <a href="../mpg-calculator/">MPG</a>
+      <a href="../fuel-cost-calculator/">Fuel Cost</a>
+      <a href="../car-insurance-calculator/">Insurance</a>
+      <a href="../car-depreciation-calculator/">Depreciation</a>
+      <a href="../fuel-consumption-calculator/">Fuel Consumption</a>
+      <a href="../../blog/">Blog</a>
+      <a href="../../about/">About</a>
+      <a href="../../contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero hero-tool">
+  <div class="wrap">
+    <p class="crumbs"><a href="../../">Home</a> &rsaquo; Tire Size Calculator</p>
+    <h1>Tire Size Calculator</h1>
+    <p class="lede">Compare your current tire size with a new one. See the change in diameter, circumference and your speedometer reading — before you spend money on new tires.</p>
+    <div class="hero-badges">
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6.5L9.5 17 4 11.5"/></svg>Free &amp; instant</span>
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6.5L9.5 17 4 11.5"/></svg>No personal information</span>
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6.5L9.5 17 4 11.5"/></svg>Speedometer check included</span>
+    </div>
+  </div>
+</section>
+
+<main class="wrap calc-shell">
+  <div class="calc-grid">
+    <div class="card form-card">
+      <h2>Your tire sizes</h2>
+      <p class="sub">Find the size on your tire sidewall — it looks like 205/55 R16 (width / aspect ratio / rim).</p>
+
+      <h3 style="font-size:.95rem;margin-bottom:10px">Current tire</h3>
+      <div class="two">
+        <div class="field"><label for="oldWidth">Width (mm)</label><input type="number" id="oldWidth" min="125" max="355" step="5" value="205" /></div>
+        <div class="field"><label for="oldAspect">Aspect ratio (%)</label><input type="number" id="oldAspect" min="25" max="85" step="5" value="55" /></div>
+      </div>
+      <div class="field"><label for="oldRim">Rim diameter (inches)</label><input type="number" id="oldRim" min="12" max="24" step="0.5" value="16" /></div>
+
+      <h3 style="font-size:.95rem;margin:18px 0 10px">New tire</h3>
+      <div class="two">
+        <div class="field"><label for="newWidth">Width (mm)</label><input type="number" id="newWidth" min="125" max="355" step="5" value="225" /></div>
+        <div class="field"><label for="newAspect">Aspect ratio (%)</label><input type="number" id="newAspect" min="25" max="85" step="5" value="45" /></div>
+      </div>
+      <div class="field" style="margin-bottom:2px"><label for="newRim">Rim diameter (inches)</label><input type="number" id="newRim" min="12" max="24" step="0.5" value="17" /></div>
+    </div>
+
+    <div class="card result-card" aria-live="polite"><span class="result-label">Your result &middot; updates as you type</span>
+      <h2>Comparison</h2>
+      <div class="big-num"><span id="diffPct">—</span><small> diameter change</small></div>
+      <p class="range-line">When your speedometer reads <strong>60 mph</strong>, your real speed is <strong id="realSpeed">—</strong></p>
+
+      <div class="vs">
+        <div class="vs-box">
+          <div class="t">Current tire</div>
+          <div class="v" id="oldSize">—</div>
+          <div class="y" id="oldDia">—</div>
+        </div>
+        <div class="vs-box">
+          <div class="t">New tire</div>
+          <div class="v" id="newSize">—</div>
+          <div class="y" id="newDia">—</div>
+        </div>
+      </div>
+
+      <div class="breakdown">
+        <h3>Full comparison</h3>
+        <div id="breakdownRows"></div>
+      </div>
+
+      <div class="verdict good" id="verdict">—</div>
+      <p class="note">Maths: sidewall height = width &times; aspect ratio &divide; 100. Diameter = (2 &times; sidewall) + (rim &times; 25.4 mm). Circumference = &pi; &times; diameter. Real speed = indicated speed &times; (new circumference &divide; old circumference).</p>
+    </div>
+  </div>
+
+  <section class="block">
+    <h2>How to read a tire size</h2>
+    <p class="intro">A tire marked <strong>205/55 R16</strong> means: 205 mm wide, sidewall height is 55% of the width, and it fits a 16-inch rim. The &ldquo;R&rdquo; stands for radial construction, which almost all modern car tires use.</p>
+    <div class="steps">
+      <div class="step"><span class="n">STEP 1</span><h3>Find your current size</h3><p>Look on the sidewall of your tire, or on the sticker inside the driver&rsquo;s door frame, or in your owner&rsquo;s manual.</p></div>
+      <div class="step"><span class="n">STEP 2</span><h3>Enter the new size</h3><p>Type in the size you are thinking of buying — a wider tire, a lower profile, or a bigger rim.</p></div>
+      <div class="step"><span class="n">STEP 3</span><h3>Check the difference</h3><p>If the diameter change is within 3%, the new size is generally considered safe to use. Bigger changes affect your speedometer, gearing and clearance.</p></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>What the numbers mean</h2>
+    <p class="intro">Three numbers decide whether a new tire size is a good fit for your car.</p>
+    <div class="factors">
+      <div class="factor"><span class="impact">KEEP WITHIN &plusmn;3%</span><h3>Diameter change</h3><p>The most important number. A bigger diameter raises your car and makes the speedometer read slow; a smaller one does the opposite. Stay within 3% and most cars handle it fine.</p></div>
+      <div class="factor"><span class="impact">SPEEDOMETER</span><h3>Real speed vs shown speed</h3><p>Your speedometer is calibrated for your original tire size. With bigger tires you are actually going faster than it shows — which matters for speed limits and speeding tickets.</p></div>
+      <div class="factor"><span class="impact">CHECK CLEARANCE</span><h3>Width and rim size</h3><p>A wider tire or bigger rim can rub against the wheel arch or suspension. Always check the clearance and that the rim fits your car&rsquo;s bolt pattern before buying.</p></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Frequently asked questions</h2>
+    <details><summary>Can I put a different tire size on my car?</summary><p>Yes, within limits. A diameter change of up to about 3% is generally considered acceptable. Bigger changes can affect your speedometer accuracy, fuel economy, handling and whether the tire clears the wheel arch — and may affect your warranty or insurance, so check first.</p></details>
+    <details><summary>Will bigger tires make my speedometer wrong?</summary><p>Yes. Bigger tires cover more ground per turn, so your car travels further than the speedometer thinks. This calculator shows your real speed at an indicated 60 mph so you can see exactly how far off it would be.</p></details>
+    <details><summary>Where do I find my current tire size?</summary><p>On the sidewall of the tire itself (for example 205/55 R16), on the sticker on the driver&rsquo;s door frame, inside the fuel filler cap, or in your owner&rsquo;s manual.</p></details>
+    <details><summary>Does tire size affect fuel economy?</summary><p>It can. Wider tires usually have more rolling resistance, which can lower MPG slightly. A much bigger diameter also changes your effective gearing. The effect is usually small for a change within 3%.</p></details>
+  </section>
+
+  <div class="related">
+    <h2>Related tools</h2>
+    <ul>
+      <li><a href="../mpg-calculator/">MPG Calculator<span>Check your real fuel economy</span></a></li>
+      <li><a href="../fuel-cost-calculator/">Fuel Cost Calculator<span>Plan the cost of any trip</span></a></li>
+      <li><a href="../car-depreciation-calculator/">Car Depreciation Calculator<span>What is your car worth now?</span></a></li>
+    </ul>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="cols">
+      <div><div class="footer-brand"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#0e7c6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15a8 8 0 1 1 16 0"/><path d="M12 15l4.5-5"/><circle cx="12" cy="15" r="1.5" fill="#0e7c6b" stroke="none"/><path d="M3 19.5h18"/></svg></span>Car Owner <span>Tools</span></div><p>Free calculators for car owners: tires, fuel economy, insurance and car value. No signup, no personal information.</p></div>
+      <div><h4>Tools</h4><ul>
+        <li><a href="../tire-size-calculator/">Tire Size Calculator</a></li>
+        <li><a href="../mpg-calculator/">MPG Calculator</a></li>
+        <li><a href="../fuel-cost-calculator/">Fuel Cost Calculator</a></li>
+        <li><a href="../car-insurance-calculator/">Car Insurance Calculator</a></li>
+        <li><a href="../car-depreciation-calculator/">Car Depreciation Calculator</a></li>
+        <li><a href="../fuel-consumption-calculator/">Fuel Consumption Calculator</a></li>
+      </ul></div>
+      <div><h4>Site</h4><ul>
+        <li><a href="../../blog/">Blog</a></li>
+        <li><a href="../../about/">About</a></li>
+        <li><a href="../../contact/">Contact</a></li>
+        <li><a href="../../privacy-policy/">Privacy Policy</a></li>
+      </ul></div>
+    </div>
+    <p class="disc"><strong>Disclaimer:</strong> Results are estimates for education and comparison only. Always confirm tire fitment with your tire dealer or vehicle manual before buying.</p>
+    <p class="copy">&copy; <span id="year">2026</span> Car Owner Tools. All rights reserved.</p>
+  </div>
+</footer>
+<script src="../../assets/js/site.js"></script>
+<script>
+(function(){
+  "use strict";
+  var MM_PER_INCH = 25.4;
+
+  function tireMetrics(width, aspect, rim){
+    var sidewall = width * aspect / 100;              // mm
+    var diameter = 2 * sidewall + rim * MM_PER_INCH;  // mm
+    var circumference = Math.PI * diameter;           // mm
+    var revsPerMile = 63360 / (circumference / MM_PER_INCH); // 1 mile = 63,360 inches
+    return { sidewall: sidewall, diameter: diameter, circumference: circumference, revsPerMile: revsPerMile };
+  }
+  function compare(oldT, newT){
+    var diffPct = (newT.diameter - oldT.diameter) / oldT.diameter * 100;
+    var realSpeed60 = 60 * newT.circumference / oldT.circumference;
+    var verdict = "good";
+    if (Math.abs(diffPct) > 5) verdict = "bad";
+    else if (Math.abs(diffPct) > 3) verdict = "warn";
+    return { diffPct: diffPct, realSpeed60: realSpeed60, verdict: verdict };
+  }
+  function fmt(n, d){ return n.toLocaleString("en-US", {minimumFractionDigits: d, maximumFractionDigits: d}); }
+  function signed(n, d){ return (n >= 0 ? "+" : "") + fmt(n, d); }
+
+  function render(){
+    var ow = parseFloat(document.getElementById("oldWidth").value) || 0;
+    var oa = parseFloat(document.getElementById("oldAspect").value) || 0;
+    var orim = parseFloat(document.getElementById("oldRim").value) || 0;
+    var nw = parseFloat(document.getElementById("newWidth").value) || 0;
+    var na = parseFloat(document.getElementById("newAspect").value) || 0;
+    var nrim = parseFloat(document.getElementById("newRim").value) || 0;
+    if (!ow || !oa || !orim || !nw || !na || !nrim) return;
+
+    var oldT = tireMetrics(ow, oa, orim);
+    var newT = tireMetrics(nw, na, nrim);
+    var c = compare(oldT, newT);
+
+    document.getElementById("diffPct").textContent = signed(c.diffPct, 2) + "%";
+    document.getElementById("realSpeed").textContent = fmt(c.realSpeed60, 1) + " mph";
+    document.getElementById("oldSize").textContent = Math.round(ow) + "/" + Math.round(oa) + " R" + orim;
+    document.getElementById("newSize").textContent = Math.round(nw) + "/" + Math.round(na) + " R" + nrim;
+    document.getElementById("oldDia").textContent = "Diameter " + fmt(oldT.diameter, 1) + " mm";
+    document.getElementById("newDia").textContent = "Diameter " + fmt(newT.diameter, 1) + " mm";
+
+    var rows = [
+      ["Sidewall height", fmt(oldT.sidewall, 1) + " mm", fmt(newT.sidewall, 1) + " mm"],
+      ["Diameter", fmt(oldT.diameter, 1) + " mm", fmt(newT.diameter, 1) + " mm"],
+      ["Circumference", fmt(oldT.circumference, 1) + " mm", fmt(newT.circumference, 1) + " mm"],
+      ["Revs per mile", fmt(oldT.revsPerMile, 0), fmt(newT.revsPerMile, 0)],
+      ["Speed at 60 mph shown", "60.0 mph", fmt(c.realSpeed60, 1) + " mph"]
+    ];
+    var box = document.getElementById("breakdownRows");
+    box.innerHTML = "";
+    rows.forEach(function(r){
+      var div = document.createElement("div");
+      div.className = "b-row";
+      div.style.gridTemplateColumns = "150px 1fr 1fr";
+      div.innerHTML = "<span>" + r[0] + "</span><span class='mono'>" + r[1] + "</span><span class='mono' style='text-align:right'>" + r[2] + "</span>";
+      box.appendChild(div);
+    });
+
+    var v = document.getElementById("verdict");
+    if (c.verdict === "good"){
+      v.className = "verdict good";
+      v.textContent = "Good fit — diameter change is within 3%, which is generally considered acceptable.";
+    } else if (c.verdict === "warn"){
+      v.className = "verdict warn";
+      v.textContent = "Caution — diameter change is over 3%. Check clearance, speedometer error and your insurer before buying.";
+    } else {
+      v.className = "verdict bad";
+      v.textContent = "Not recommended — diameter change is over 5%. This can seriously affect your speedometer, handling and clearance.";
+    }
+  }
+
+  ["oldWidth","oldAspect","oldRim","newWidth","newAspect","newRim"].forEach(function(id){
+    document.getElementById(id).addEventListener("input", render);
+    document.getElementById(id).addEventListener("change", render);
+  });
+  render();
+  window.__test = { tireMetrics: tireMetrics, compare: compare };
+})();
+</script>
+</body>
+</html>
