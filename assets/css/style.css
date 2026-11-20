@@ -34,6 +34,7 @@
   --radius:16px;
   --radius-sm:10px;
   --radius-lg:22px;
+  color-scheme:light dark;
 }
 @media (prefers-color-scheme: dark){
   :root{
@@ -170,19 +171,25 @@ svg{flex:none}
 /* Hero — homepage variant (with search) */
 .hero-home{padding:64px 0 72px}
 .hero-home h1{max-width:22ch}
-.hero-home .search-box{margin-top:28px;max-width:600px;position:relative}
-.search-box input{
-  width:100%;padding:16px 52px 16px 50px;border:2px solid transparent;border-radius:999px;
-  background:#fff;color:var(--ink);font-size:1.02rem;font-family:inherit;
+.hero-home .search-box{margin-top:28px;max-width:600px}
+.search-box{
+  display:flex;align-items:center;gap:12px;
+  background:var(--surface);border:2px solid transparent;border-radius:999px;
+  padding:8px 10px 8px 18px;
   box-shadow:0 14px 34px rgba(4,42,35,.35);
 }
-.search-box input::placeholder{color:#8a9a94}
-.search-box input:focus{outline:none;border-color:var(--mint);box-shadow:0 0 0 4px rgba(167,232,213,.45),0 14px 34px rgba(4,42,35,.35)}
-.search-box .search-icon{position:absolute;left:18px;top:50%;transform:translateY(-50%);width:20px;height:20px;color:var(--teal);pointer-events:none}
+.search-box input{
+  flex:1;min-width:0;width:auto;
+  padding:8px 0;border:0;border-radius:0;background:transparent;
+  color:var(--ink);font-size:1.02rem;font-family:inherit;
+  box-shadow:none;outline:none;
+}
+.search-box input::placeholder{color:var(--muted)}
+.search-box:focus-within{border-color:var(--mint);box-shadow:0 0 0 4px rgba(167,232,213,.45),0 14px 34px rgba(4,42,35,.35)}
+.search-box .search-icon{width:20px;height:20px;color:var(--teal);pointer-events:none}
 .search-box kbd{
-  position:absolute;right:14px;top:50%;transform:translateY(-50%);
   background:var(--teal-tint);color:var(--teal-dark);border:1px solid var(--teal-tint-2);
-  border-radius:6px;padding:2px 8px;font-size:.75rem;font-family:inherit;font-weight:600;
+  border-radius:6px;padding:4px 10px;font-size:.75rem;font-family:inherit;font-weight:600;
 }
 @media (max-width:560px){.search-box kbd{display:none}.hero-home{padding:48px 0 56px}}
 
