@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Car Depreciation Calculator — Car Value</title>
+<meta name="description" content="Free car depreciation calculator. Find out what your car is worth today and how much value it loses each year." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../assets/css/style.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Car Depreciation Calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web browser",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Work out what your car is worth today from its purchase price, age and depreciation rate."
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#0e7c6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15a8 8 0 1 1 16 0"/><path d="M12 15l4.5-5"/><circle cx="12" cy="15" r="1.5" fill="#0e7c6b" stroke="none"/><path d="M3 19.5h18"/></svg></span>Car Owner <span>Tools</span></a>
+    <button class="nav-toggle" type="button" aria-label="Menu">Menu</button>
+    <nav class="site-nav" aria-label="Main navigation"><a href="../../">Home</a><a href="../../tools/tire-size-calculator/">Tire Size</a><a href="../../tools/mpg-calculator/">MPG</a><a href="../../tools/fuel-cost-calculator/">Fuel Cost</a><a href="../../tools/car-insurance-calculator/">Insurance</a><a href="../../tools/car-depreciation-calculator/" class="active">Depreciation</a><a href="../../tools/fuel-consumption-calculator/">Fuel Consumption</a><a href="../../blog/">Blog</a><a href="../../about/">About</a><a href="../../contact/">Contact</a></nav>
+  </div>
+</header>
+
+<section class="hero hero-tool"><div class="wrap">
+<p class="crumbs"><a href="../../">Home</a> &rsaquo; Car Depreciation Calculator</p>
+<h1>Car Depreciation Calculator</h1>
+<p class="lede">New cars lose value fast — often 20% in the first year alone. Enter what you paid and how old the car is to see what it is worth now.</p>
+<div class="hero-badges"><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6.5L9.5 17 4 11.5"/></svg>Free &amp; instant</span><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6.5L9.5 17 4 11.5"/></svg>No personal information</span><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6.5L9.5 17 4 11.5"/></svg>Year-by-year table</span></div>
+</div></section>
+<main class="wrap calc-shell"><div class="calc-grid">
+<div class="card form-card"><h2><span class="h2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5l6 6 4-4 8 8"/><path d="M21 12.5v5h-5"/><path d="M3 21h18"/></svg></span>Your car</h2>
+<p class="sub">Depreciation is an estimate: real values also depend on mileage, condition, brand and demand for your model.</p>
+<div class="field"><label for="price">Purchase price ($)</label>
+<input type="number" id="price" min="500" max="1000000" step="500" value="30000" /></div>
+<div class="field"><label for="years">Age of the car (years)</label>
+<input type="number" id="years" min="0" max="30" step="1" value="3" /></div>
+<div class="field"><label for="rate">Annual depreciation rate (%)</label>
+<input type="number" id="rate" min="1" max="40" step="0.5" value="15" />
+<span class="hint">Most cars lose 15&ndash;20% a year early on, then slow to 8&ndash;10%. Use 15% if you are unsure.</span></div>
+<div class="field"><label>Or pick a preset</label><div class="seg3" id="presetSeg">
+<button type="button" data-v="20" aria-pressed="false">New car (20%)</button>
+<button type="button" data-v="15" aria-pressed="true">Average (15%)</button>
+<button type="button" data-v="10" aria-pressed="false">Slow (10%)</button>
+</div></div>
+</div>
+<div class="card result-card" aria-live="polite"><span class="result-label">Your result &middot; updates as you type</span><h2>What it is worth now</h2>
+<div class="big-num"><span id="value">&mdash;</span></div>
+<p class="range-line">You have lost <strong id="lost">&mdash;</strong> (<strong id="lostPct">&mdash;</strong>) so far</p>
+<div class="vs"><div class="vs-box"><div class="t">Value after 1 year</div><div class="v" id="y1">&mdash;</div><div class="y">the biggest single drop</div></div>
+<div class="vs-box"><div class="t">Value after 5 years</div><div class="v" id="y5">&mdash;</div><div class="y">if the rate stays the same</div></div></div>
+<div class="breakdown"><h3>Year by year</h3><div id="breakdownRows"></div></div>
+<div class="verdict good" id="verdict">&mdash;</div>
+<p class="note">Maths: value after n years = purchase price &times; (1 &minus; rate)<sup>n</sup>. This declining-balance method matches how most cars actually lose value — fast first, slower later.</p>
+</div></div>
+<section class="block"><h2>How much value do cars lose?</h2>
+<p class="intro">The pattern is remarkably consistent across brands — the first years hurt the most.</p>
+<div class="factors">
+<div class="factor"><span class="impact">~20% IN YEAR 1</span><h3>The first year</h3><p>A new car typically loses around a fifth of its value in the first year, mostly the moment it leaves the dealership.</p></div>
+<div class="factor"><span class="impact">~40&ndash;50% BY YEAR 3</span><h3>Three years in</h3><p>After three years most cars are worth roughly half what they cost new. This is why 3-year-old cars are often the best value buys.</p></div>
+<div class="factor"><span class="impact">SLOWS AFTER YEAR 5</span><h3>Later years</h3><p>Depreciation slows a lot after five years. A well-kept 8-year-old car loses only a few percent of its value per year.</p></div>
+<div class="factor"><span class="impact">BRAND MATTERS</span><h3>Some hold value better</h3><p>Toyota, Honda and some trucks and SUVs hold value better than average; luxury cars and large sedans usually lose value fastest.</p></div>
+<div class="factor"><span class="impact">MILEAGE COUNTS</span><h3>Miles and condition</h3><p>High mileage, accidents and poor condition all push value down faster than the average rate used here.</p></div>
+<div class="factor"><span class="impact">DEMAND SHIFTS</span><h3>Market swings</h3><p>Used-car prices rise and fall with the wider market. In a shortage, even older cars can hold value unusually well.</p></div>
+</div></section>
+<section class="block"><h2>Frequently asked questions</h2>
+<details><summary>How do I calculate car depreciation?</summary><p>Multiply the purchase price by (1 &minus; annual rate) for each year. At a 15% rate, a $30,000 car is worth $25,500 after one year, $21,675 after two, and about $18,424 after three.</p></details>
+<details><summary>What is a normal depreciation rate?</summary><p>Most cars lose 15&ndash;20% a year in the first few years, then 8&ndash;12% a year after that. This calculator uses one average rate — set it higher for luxury cars, lower for models known to hold value.</p></details>
+<details><summary>When does a car stop losing value?</summary><p>It never fully stops, but the yearly loss becomes small after 8&ndash;10 years. Very old cars in good condition can even rise in value if they become collectable.</p></details>
+<details><summary>Is it better to buy new or used?</summary><p>On depreciation alone, used wins: someone else paid for the steep first-year drop. Buying a 2&ndash;3 year old car often gets you most of the car for roughly half the price.</p></details>
+</section>
+<div class="related"><h2>Related tools</h2><ul><li><a href="../car-insurance-calculator/">Car Insurance Calculator<span>Estimate your premium by state and age</span></a></li><li><a href="../mpg-calculator/">MPG Calculator<span>Work out your real MPG</span></a></li><li><a href="../fuel-cost-calculator/">Fuel Cost Calculator<span>Plan the cost of any trip</span></a></li></ul></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="cols">
+      <div><div class="footer-brand"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#0e7c6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15a8 8 0 1 1 16 0"/><path d="M12 15l4.5-5"/><circle cx="12" cy="15" r="1.5" fill="#0e7c6b" stroke="none"/><path d="M3 19.5h18"/></svg></span>Car Owner <span>Tools</span></div><p>Free calculators for car owners: tires, fuel economy, insurance and car value. No signup, no personal information.</p></div>
+      <div><h4>Tools</h4><ul><li><a href="../../tools/tire-size-calculator/">Tire Size Calculator</a></li><li><a href="../../tools/mpg-calculator/">MPG Calculator</a></li><li><a href="../../tools/fuel-cost-calculator/">Fuel Cost Calculator</a></li><li><a href="../../tools/car-insurance-calculator/">Car Insurance Calculator</a></li><li><a href="../../tools/car-depreciation-calculator/">Car Depreciation Calculator</a></li><li><a href="../../tools/fuel-consumption-calculator/">Fuel Consumption Calculator</a></li></ul></div>
+      <div><h4>Site</h4><ul>
+        <li><a href="../../blog/">Blog</a></li>
+        <li><a href="../../about/">About</a></li>
+        <li><a href="../../contact/">Contact</a></li>
+        <li><a href="../../privacy-policy/">Privacy Policy</a></li>
+      </ul></div>
+    </div>
+    <p class="disc"><strong>Disclaimer:</strong> Results are estimates for education and comparison only. Actual car values depend on mileage, condition, brand and market demand.</p>
+    <p class="copy">&copy; <span id="year">2026</span> Car Owner Tools. All rights reserved.</p>
+  </div>
+</footer>
+<script src="../../assets/js/site.js"></script>
+
+<script>
+(function(){
+  "use strict";
+  function calcDepreciation(price, years, ratePct){
+    var r = ratePct / 100, out = [], v = price;
+    for (var y = 1; y <= Math.max(years, 5); y++){ v = price * Math.pow(1 - r, y); out.push({ year: y, value: v }); }
+    var now = price * Math.pow(1 - r, years);
+    return { now: now, lost: price - now, lostPct: years === 0 ? 0 : (1 - Math.pow(1 - r, years)) * 100, table: out };
+  }
+  function money(n){ return "$" + n.toLocaleString("en-US", {minimumFractionDigits: 0, maximumFractionDigits: 0}); }
+  function render(){
+    var price = parseFloat(document.getElementById("price").value) || 0;
+    var years = parseInt(document.getElementById("years").value, 10) || 0;
+    var rate = parseFloat(document.getElementById("rate").value) || 0;
+    if (!price || !rate) return;
+    var r = calcDepreciation(price, years, rate);
+    document.getElementById("value").textContent = money(r.now);
+    document.getElementById("lost").textContent = money(r.lost);
+    document.getElementById("lostPct").textContent = r.lostPct.toFixed(0) + "%";
+    document.getElementById("y1").textContent = money(price * (1 - rate / 100));
+    document.getElementById("y5").textContent = money(price * Math.pow(1 - rate / 100, 5));
+    var box = document.getElementById("breakdownRows"); box.innerHTML = "";
+    r.table.slice(0, Math.max(years, 1)).forEach(function(row){
+      var div = document.createElement("div"); div.className = "b-row";
+      div.style.gridTemplateColumns = "1fr auto";
+      div.innerHTML = "<span>After year " + row.year + "</span><span class='mono' style='text-align:right'>" + money(row.value) + "</span>";
+      box.appendChild(div);
+    });
+    var v = document.getElementById("verdict");
+    if (years <= 1){ v.className = "verdict warn"; v.textContent = "The first year is the most expensive \u2014 about " + money(price - price * (1 - rate / 100)) + " gone in year one alone."; }
+    else if (r.lostPct >= 50){ v.className = "verdict good"; v.textContent = "More than half the value is gone \u2014 from here the yearly loss slows down a lot, so keeping the car gets cheaper."; }
+    else { v.className = "verdict good"; v.textContent = "Still holding " + (100 - r.lostPct).toFixed(0) + "% of its original value after " + years + " years."; }
+  }
+  document.querySelectorAll("#presetSeg button").forEach(function(b){
+    b.addEventListener("click", function(){
+      document.getElementById("rate").value = b.getAttribute("data-v");
+      document.querySelectorAll("#presetSeg button").forEach(function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      render();
+    });
+  });
+  ["price","years","rate"].forEach(function(id){
+    document.getElementById(id).addEventListener("input", render);
+    document.getElementById(id).addEventListener("change", render);
+  });
+  render();
+  window.__test = { calcDepreciation: calcDepreciation };
+})();
+</script>
+</body>
+</html>
