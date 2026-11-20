@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fuel Cost Calculator — Trip Fuel Cost</title>
+<meta name="description" content="Free fuel cost calculator. Enter distance, MPG and fuel price to see what any trip costs, how much fuel you need and the cost per mile." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../assets/css/style.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Fuel Cost Calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web browser",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Plan the cost of any trip from distance, MPG and fuel price."
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#0e7c6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15a8 8 0 1 1 16 0"/><path d="M12 15l4.5-5"/><circle cx="12" cy="15" r="1.5" fill="#0e7c6b" stroke="none"/><path d="M3 19.5h18"/></svg></span>Car Owner <span>Tools</span></a>
+    <button class="nav-toggle" type="button" aria-label="Menu">Menu</button>
+    <nav class="site-nav" aria-label="Main navigation"><a href="../../">Home</a><a href="../../tools/tire-size-calculator/">Tire Size</a><a href="../../tools/mpg-calculator/">MPG</a><a href="../../tools/fuel-cost-calculator/" class="active">Fuel Cost</a><a href="../../tools/car-insurance-calculator/">Insurance</a><a href="../../tools/car-depreciation-calculator/">Depreciation</a><a href="../../tools/fuel-consumption-calculator/">Fuel Consumption</a><a href="../../blog/">Blog</a><a href="../../about/">About</a><a href="../../contact/">Contact</a></nav>
+  </div>
+</header>
+
+<section class="hero hero-tool"><div class="wrap">
+<p class="crumbs"><a href="../../">Home</a> &rsaquo; Fuel Cost Calculator</p>
+<h1>Fuel Cost Calculator</h1>
+<p class="lede">Planning a drive? Enter the distance, your car&rsquo;s MPG and the fuel price — and see exactly what the trip will cost before you set off.</p>
+<div class="hero-badges"><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6.5L9.5 17 4 11.5"/></svg>Free &amp; instant</span><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6.5L9.5 17 4 11.5"/></svg>No personal information</span><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6.5L9.5 17 4 11.5"/></svg>Round trip included</span></div>
+</div></section>
+<main class="wrap calc-shell"><div class="calc-grid">
+<div class="card form-card"><h2><span class="h2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 21V5a2 2 0 0 1 2-2h5a2 2 0 0 1 2 2v16"/><path d="M3.5 21h13"/><path d="M15 9.5h2a2 2 0 0 1 2 2V15a1.6 1.6 0 0 0 3.2 0V9.8L20.5 7"/><path d="M7.5 7h4M7.5 11h4"/></svg></span>Your trip</h2>
+<p class="sub">Not sure of your MPG? Use our <a href="../mpg-calculator/">MPG Calculator</a> to work it out from your last fill-up.</p>
+<div class="field"><label for="distance">Distance (miles)</label>
+<input type="number" id="distance" min="1" max="100000" step="1" value="250" />
+<span class="hint">One-way distance. Tick round trip below to double it.</span></div>
+<div class="field"><label for="mpg">Your car&rsquo;s MPG</label>
+<input type="number" id="mpg" min="1" max="200" step="0.1" value="30" />
+<span class="hint">Most modern petrol cars do 25&ndash;35 MPG; hybrids often 40&ndash;55.</span></div>
+<div class="field"><label for="price">Fuel price per gallon</label>
+<input type="number" id="price" min="0" max="20" step="0.01" value="3.50" /></div>
+<div class="field"><label>Trip type</label><div class="seg" id="tripSeg">
+<button type="button" data-v="one" aria-pressed="true">One way</button>
+<button type="button" data-v="round" aria-pressed="false">Round trip</button>
+</div></div>
+</div>
+<div class="card result-card" aria-live="polite"><span class="result-label">Your result &middot; updates as you type</span><h2>Your trip cost</h2>
+<div class="big-num"><span id="totalCost">&mdash;</span></div>
+<p class="range-line">That is <strong id="gallons">&mdash;</strong> of fuel &middot; <strong id="costMile">&mdash;</strong> per mile</p>
+<div class="vs"><div class="vs-box"><div class="t">Distance</div><div class="v" id="distOut">&mdash;</div><div class="y" id="tripType">&mdash;</div></div>
+<div class="vs-box"><div class="t">Cost per 100 miles</div><div class="v" id="cost100">&mdash;</div><div class="y">at the price above</div></div></div>
+<div class="breakdown"><h3>Breakdown</h3><div id="breakdownRows"></div></div>
+<div class="verdict good" id="verdict">&mdash;</div>
+<p class="note">Maths: gallons needed = distance &divide; MPG. Trip cost = gallons &times; fuel price. Cost per mile = fuel price &divide; MPG. The yearly figure assumes 12,000 miles a year, the US average. Fuel prices change daily, so treat this as a planning estimate.</p>
+</div></div>
+<section class="block"><h2>How to cut the cost of a trip</h2>
+<p class="intro">The price at the pump is only part of it — how you drive matters just as much.</p>
+<div class="factors">
+<div class="factor"><span class="impact">FREE TO FIX</span><h3>Slow down a little</h3><p>Driving at 65 mph instead of 75 mph can cut fuel use by around 10&ndash;15% on a motorway trip. It also adds only a few minutes to most journeys.</p></div>
+<div class="factor"><span class="impact">UP TO 3% OR MORE</span><h3>Check tire pressure</h3><p>Under-inflated tires waste fuel on every mile. The correct pressure is on the driver&rsquo;s door sticker — check it before a long drive.</p></div>
+<div class="factor"><span class="impact">EXTRA DRAG</span><h3>Take the roof box off</h3><p>A roof box or rack adds drag and can raise fuel use noticeably at motorway speeds. Remove it when you are not using it.</p></div>
+<div class="factor"><span class="impact">PLAN AHEAD</span><h3>Combine errands</h3><p>One longer trip uses far less fuel than several short cold-start trips. A warm engine is a much more efficient engine.</p></div>
+<div class="factor"><span class="impact">SMALL SAVING</span><h3>Compare fuel prices</h3><p>Prices can vary by 20&ndash;30 cents a gallon between stations on the same road. Filling up before the motorway usually pays.</p></div>
+<div class="factor"><span class="impact">STEADY WINS</span><h3>Use cruise control</h3><p>On flat motorways, cruise control keeps a steady speed and avoids the small accelerations that waste fuel.</p></div>
+</div></section>
+<section class="block"><h2>Frequently asked questions</h2>
+<details><summary>How do I calculate fuel cost for a trip?</summary><p>Divide the distance by your MPG to get the gallons needed, then multiply by the fuel price per gallon. For example, 250 miles at 30 MPG needs 8.3 gallons; at $3.50 a gallon that is about $29.</p></details>
+<details><summary>What is a good MPG for a road trip?</summary><p>On a motorway run most petrol cars return 30&ndash;40 MPG, and hybrids 45 MPG or more. City driving is always lower, so use your motorway figure for trip planning, not your overall average.</p></details>
+<details><summary>Does the calculator include tolls?</summary><p>No — this is fuel only. Add tolls, parking and food separately when you budget a trip.</p></details>
+<details><summary>Why is my real cost higher than the estimate?</summary><p>Traffic, hills, air conditioning, extra weight and a roof box all raise fuel use. Treat the result as a minimum and allow 5&ndash;10% extra for a long trip.</p></details>
+</section>
+<div class="related"><h2>Related tools</h2><ul><li><a href="../mpg-calculator/">MPG Calculator<span>Work out your real MPG first</span></a></li><li><a href="../fuel-consumption-calculator/">Fuel Consumption Calculator<span>Convert L/100km, MPG and km/L</span></a></li><li><a href="../tire-size-calculator/">Tire Size Calculator<span>Compare tire sizes before you buy</span></a></li></ul></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="cols">
+      <div><div class="footer-brand"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#0e7c6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15a8 8 0 1 1 16 0"/><path d="M12 15l4.5-5"/><circle cx="12" cy="15" r="1.5" fill="#0e7c6b" stroke="none"/><path d="M3 19.5h18"/></svg></span>Car Owner <span>Tools</span></div><p>Free calculators for car owners: tires, fuel economy, insurance and car value. No signup, no personal information.</p></div>
+      <div><h4>Tools</h4><ul><li><a href="../../tools/tire-size-calculator/">Tire Size Calculator</a></li><li><a href="../../tools/mpg-calculator/">MPG Calculator</a></li><li><a href="../../tools/fuel-cost-calculator/">Fuel Cost Calculator</a></li><li><a href="../../tools/car-insurance-calculator/">Car Insurance Calculator</a></li><li><a href="../../tools/car-depreciation-calculator/">Car Depreciation Calculator</a></li><li><a href="../../tools/fuel-consumption-calculator/">Fuel Consumption Calculator</a></li></ul></div>
+      <div><h4>Site</h4><ul>
+        <li><a href="../../blog/">Blog</a></li>
+        <li><a href="../../about/">About</a></li>
+        <li><a href="../../contact/">Contact</a></li>
+        <li><a href="../../privacy-policy/">Privacy Policy</a></li>
+      </ul></div>
+    </div>
+    <p class="disc"><strong>Disclaimer:</strong> Results are estimates for education and comparison only. Actual fuel use varies with driving conditions, vehicle condition and fuel prices.</p>
+    <p class="copy">&copy; <span id="year">2026</span> Car Owner Tools. All rights reserved.</p>
+  </div>
+</footer>
+<script src="../../assets/js/site.js"></script>
+
+<script>
+(function(){
+  "use strict";
+  var roundTrip = false;
+  function calcFuelCost(distance, mpg, price, round){
+    var d = round ? distance * 2 : distance;
+    var gallons = d / mpg;
+    var cost = gallons * price;
+    var annualGallons = 12000 / mpg; // at 12,000 miles a year
+    return { distance: d, gallons: gallons, cost: cost, costPerMile: price / mpg, cost100: (price / mpg) * 100,
+             annualGallons: annualGallons, annualCost: annualGallons * price };
+  }
+  function money(n){ return "$" + n.toLocaleString("en-US", {minimumFractionDigits: 2, maximumFractionDigits: 2}); }
+  function fmt(n, d){ return n.toLocaleString("en-US", {minimumFractionDigits: d, maximumFractionDigits: d}); }
+  function render(){
+    var distance = parseFloat(document.getElementById("distance").value) || 0;
+    var mpg = parseFloat(document.getElementById("mpg").value) || 0;
+    var price = parseFloat(document.getElementById("price").value) || 0;
+    if (!distance || !mpg) return;
+    var r = calcFuelCost(distance, mpg, price, roundTrip);
+    document.getElementById("totalCost").textContent = money(r.cost);
+    document.getElementById("gallons").textContent = fmt(r.gallons, 1) + " gallons";
+    document.getElementById("costMile").textContent = price > 0 ? money(r.costPerMile) : "\u2014";
+    document.getElementById("distOut").textContent = fmt(r.distance, 0) + " mi";
+    document.getElementById("tripType").textContent = roundTrip ? "Round trip" : "One way";
+    document.getElementById("cost100").textContent = price > 0 ? money(r.cost100) : "\u2014";
+    var rows = [["Distance", fmt(r.distance, 0) + " mi"], ["Fuel needed", fmt(r.gallons, 1) + " gal"],
+      ["Fuel price", price > 0 ? money(price) + " / gal" : "\u2014"], ["Cost per mile", price > 0 ? money(r.costPerMile) : "\u2014"],
+      ["Fuel per year (12,000 mi)", fmt(r.annualGallons, 0) + " gal"],
+      ["Fuel cost per year (12,000 mi)", price > 0 ? money(r.annualCost) : "\u2014"]];
+    var box = document.getElementById("breakdownRows"); box.innerHTML = "";
+    rows.forEach(function(rw){ var div = document.createElement("div"); div.className = "b-row";
+      div.style.gridTemplateColumns = "1fr auto";
+      div.innerHTML = "<span>" + rw[0] + "</span><span class='mono' style='text-align:right'>" + rw[1] + "</span>";
+      box.appendChild(div); });
+    var v = document.getElementById("verdict");
+    if (mpg >= 40){ v.className = "verdict good"; v.textContent = "Efficient trip \u2014 at " + fmt(mpg, 0) + " MPG your fuel cost stays low."; }
+    else if (mpg >= 25){ v.className = "verdict good"; v.textContent = "Typical trip cost \u2014 most cars sit in this range."; }
+    else { v.className = "verdict warn"; v.textContent = "Thirsty car \u2014 under 25 MPG makes long trips expensive. Check tire pressure and consider a slower cruising speed."; }
+  }
+  document.querySelectorAll("#tripSeg button").forEach(function(b){
+    b.addEventListener("click", function(){
+      roundTrip = (b.getAttribute("data-v") === "round");
+      document.querySelectorAll("#tripSeg button").forEach(function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      render();
+    });
+  });
+  ["distance","mpg","price"].forEach(function(id){
+    document.getElementById(id).addEventListener("input", render);
+    document.getElementById(id).addEventListener("change", render);
+  });
+  render();
+  window.__test = { calcFuelCost: calcFuelCost };
+})();
+</script>
+</body>
+</html>
