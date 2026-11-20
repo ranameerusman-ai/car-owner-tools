@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MPG Calculator — Miles Per Gallon &amp; Fuel Economy</title>
+<meta name="description" content="Free MPG calculator. Enter miles driven and gallons used to find your real miles per gallon, plus L/100km, fuel cost and cost per mile." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../assets/css/style.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "MPG Calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web browser",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Calculate miles per gallon from miles driven and gallons used, with L/100km and cost per mile."
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#0e7c6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15a8 8 0 1 1 16 0"/><path d="M12 15l4.5-5"/><circle cx="12" cy="15" r="1.5" fill="#0e7c6b" stroke="none"/><path d="M3 19.5h18"/></svg></span>Car Owner <span>Tools</span></a>
+    <button class="nav-toggle" type="button" aria-label="Menu">Menu</button>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="../../">Home</a>
+      <a href="../tire-size-calculator/">Tire Size</a>
+      <a href="../mpg-calculator/" class="active">MPG</a>
+      <a href="../fuel-cost-calculator/">Fuel Cost</a>
+      <a href="../car-insurance-calculator/">Insurance</a>
+      <a href="../car-depreciation-calculator/">Depreciation</a>
+      <a href="../fuel-consumption-calculator/">Fuel Consumption</a>
+      <a href="../../blog/">Blog</a>
+      <a href="../../about/">About</a>
+      <a href="../../contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero hero-tool">
+  <div class="wrap">
+    <p class="crumbs"><a href="../../">Home</a> &rsaquo; MPG Calculator</p>
+    <h1>MPG Calculator</h1>
+    <p class="lede">Find your car&rsquo;s real miles per gallon. Fill the tank, note the miles, fill up again — and let the calculator do the maths.</p>
+    <div class="hero-badges">
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6.5L9.5 17 4 11.5"/></svg>Free &amp; instant</span>
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6.5L9.5 17 4 11.5"/></svg>No personal information</span>
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6.5L9.5 17 4 11.5"/></svg>L/100km included</span>
+    </div>
+  </div>
+</section>
+
+<main class="wrap calc-shell">
+  <div class="calc-grid">
+    <div class="card form-card">
+      <h2>Your numbers</h2>
+      <p class="sub">For the most accurate result, use a full tank: fill up, reset the trip meter, drive normally, then fill up again.</p>
+
+      <div class="field">
+        <label for="miles">Miles driven</label>
+        <input type="number" id="miles" min="1" max="100000" step="1" value="300" />
+        <span class="hint">Miles since your last fill-up (use the trip meter).</span>
+      </div>
+      <div class="field">
+        <label for="gallons">Gallons used</label>
+        <input type="number" id="gallons" min="0.1" max="1000" step="0.1" value="10" />
+        <span class="hint">Gallons it took to fill the tank again.</span>
+      </div>
+      <div class="field" style="margin-bottom:2px">
+        <label for="price">Fuel price per gallon <span class="hint">(optional)</span></label>
+        <input type="number" id="price" min="0" max="20" step="0.01" value="3.50" />
+      </div>
+    </div>
+
+    <div class="card result-card" aria-live="polite"><span class="result-label">Your result &middot; updates as you type</span>
+      <h2>Your fuel economy</h2>
+      <div class="big-num"><span id="mpg">—</span><small> MPG</small></div>
+      <p class="range-line">That is <strong id="l100">—</strong> litres per 100 km &middot; <strong id="kml">—</strong> km per litre</p>
+
+      <div class="vs">
+        <div class="vs-box">
+          <div class="t">Fuel used</div>
+          <div class="v" id="galUsed">—</div>
+          <div class="y" id="totalCost">—</div>
+        </div>
+        <div class="vs-box">
+          <div class="t">Cost per mile</div>
+          <div class="v" id="costMile">—</div>
+          <div class="y">at the price above</div>
+        </div>
+      </div>
+
+      <div class="breakdown">
+        <h3>What this means</h3>
+        <div id="breakdownRows"></div>
+      </div>
+
+      <div class="verdict good" id="verdict">—</div>
+      <p class="note">Maths: MPG = miles driven &divide; gallons used. L/100km = 235.214 &divide; MPG. Cost per mile = fuel price &divide; MPG. As a rough guide, most modern petrol cars return roughly 25–35 MPG in mixed driving; hybrids and small diesels do more.</p>
+    </div>
+  </div>
+
+  <section class="block">
+    <h2>How to measure your MPG accurately</h2>
+    <p class="intro">The dashboard figure is an estimate. This three-step method gives you your real number.</p>
+    <div class="steps">
+      <div class="step"><span class="n">STEP 1</span><h3>Fill the tank</h3><p>Fill up completely and reset your trip meter to zero (or write down the odometer reading).</p></div>
+      <div class="step"><span class="n">STEP 2</span><h3>Drive normally</h3><p>Drive as you usually do until the tank is at least half empty — a longer distance gives a more accurate result.</p></div>
+      <div class="step"><span class="n">STEP 3</span><h3>Fill up and calculate</h3><p>Fill the tank again and note the gallons. Enter the miles and gallons above — that is your real MPG.</p></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>What affects your MPG?</h2>
+    <p class="intro">Your MPG is not a fixed number — it changes with how and where you drive.</p>
+    <div class="factors">
+      <div class="factor"><span class="impact">BIGGEST FACTOR</span><h3>Driving style</h3><p>Smooth, steady driving uses far less fuel than hard acceleration and braking. Motorway cruising at a steady speed is usually the most efficient.</p></div>
+      <div class="factor"><span class="impact">UP TO 3% OR MORE</span><h3>Tire pressure</h3><p>Under-inflated tires increase rolling resistance and waste fuel. Check pressures monthly — the correct figure is on the driver&rsquo;s door sticker.</p></div>
+      <div class="factor"><span class="impact">EXTRA WEIGHT &amp; DRAG</span><h3>Load and roof racks</h3><p>Extra weight and a roof box or rack increase fuel use. Remove roof racks when you are not using them.</p></div>
+      <div class="factor"><span class="impact">CITY VS MOTORWAY</span><h3>Trip type</h3><p>Short city trips with lots of stops use much more fuel per mile than long motorway runs. Compare like with like.</p></div>
+      <div class="factor"><span class="impact">REGULAR CARE</span><h3>Maintenance</h3><p>A dirty air filter, worn spark plugs or old engine oil can all reduce efficiency. Keep up with scheduled servicing.</p></div>
+      <div class="factor"><span class="impact">COLD STARTS</span><h3>Weather and warm-up</h3><p>Engines use more fuel when cold, so short trips in winter return the lowest MPG of all.</p></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Frequently asked questions</h2>
+    <details><summary>What is a good MPG?</summary><p>It depends on the car. As a rough guide, most modern petrol cars return about 25–35 MPG in mixed driving, small cars and hybrids often 40–55 MPG, and large SUVs or trucks 15–25 MPG. Compare your result with your car&rsquo;s official figures and with your own past results, not with other cars.</p></details>
+    <details><summary>Why is my MPG lower than the official figure?</summary><p>Official figures come from lab tests in ideal conditions. Real driving — short trips, cold starts, city traffic, air conditioning and extra weight — almost always returns lower MPG.</p></details>
+    <details><summary>How do I convert MPG to L/100km?</summary><p>Divide 235.214 by your MPG. For example, 30 MPG is about 7.8 L/100km. This calculator does it for you automatically.</p></details>
+    <details><summary>Can I use this calculator for a diesel or hybrid?</summary><p>Yes — the maths is the same for petrol, diesel and hybrid cars. Just enter the miles and the fuel used.</p></details>
+  </section>
+
+  <div class="related">
+    <h2>Related tools</h2>
+    <ul>
+      <li><a href="../fuel-cost-calculator/">Fuel Cost Calculator<span>Plan the cost of any trip</span></a></li>
+      <li><a href="../fuel-consumption-calculator/">Fuel Consumption Calculator<span>Convert L/100km, MPG and km/L</span></a></li>
+      <li><a href="../tire-size-calculator/">Tire Size Calculator<span>Compare tire sizes before you buy</span></a></li>
+    </ul>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="cols">
+      <div><div class="footer-brand"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#0e7c6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15a8 8 0 1 1 16 0"/><path d="M12 15l4.5-5"/><circle cx="12" cy="15" r="1.5" fill="#0e7c6b" stroke="none"/><path d="M3 19.5h18"/></svg></span>Car Owner <span>Tools</span></div><p>Free calculators for car owners: tires, fuel economy, insurance and car value. No signup, no personal information.</p></div>
+      <div><h4>Tools</h4><ul>
+        <li><a href="../tire-size-calculator/">Tire Size Calculator</a></li>
+        <li><a href="../mpg-calculator/">MPG Calculator</a></li>
+        <li><a href="../fuel-cost-calculator/">Fuel Cost Calculator</a></li>
+        <li><a href="../car-insurance-calculator/">Car Insurance Calculator</a></li>
+        <li><a href="../car-depreciation-calculator/">Car Depreciation Calculator</a></li>
+        <li><a href="../fuel-consumption-calculator/">Fuel Consumption Calculator</a></li>
+      </ul></div>
+      <div><h4>Site</h4><ul>
+        <li><a href="../../blog/">Blog</a></li>
+        <li><a href="../../about/">About</a></li>
+        <li><a href="../../contact/">Contact</a></li>
+        <li><a href="../../privacy-policy/">Privacy Policy</a></li>
+      </ul></div>
+    </div>
+    <p class="disc"><strong>Disclaimer:</strong> Results are estimates for education and comparison only. Actual fuel economy varies with driving conditions and vehicle condition.</p>
+    <p class="copy">&copy; <span id="year">2026</span> Car Owner Tools. All rights reserved.</p>
+  </div>
+</footer>
+<script src="../../assets/js/site.js"></script>
+<script>
+(function(){
+  "use strict";
+  function calcMPG(miles, gallons, price){
+    var mpg = miles / gallons;
+    var l100 = 235.214 / mpg;
+    var kml = 100 / l100;
+    var totalCost = gallons * price;
+    var costPerMile = price / mpg;
+    var annualGallons = 12000 / mpg; // at 12,000 miles a year
+    var annualCost = annualGallons * price;
+    return { mpg: mpg, l100: l100, kml: kml, totalCost: totalCost, costPerMile: costPerMile,
+             annualGallons: annualGallons, annualCost: annualCost };
+  }
+  function money(n){ return "$" + n.toLocaleString("en-US", {minimumFractionDigits: 2, maximumFractionDigits: 2}); }
+  function fmt(n, d){ return n.toLocaleString("en-US", {minimumFractionDigits: d, maximumFractionDigits: d}); }
+
+  function render(){
+    var miles = parseFloat(document.getElementById("miles").value) || 0;
+    var gallons = parseFloat(document.getElementById("gallons").value) || 0;
+    var price = parseFloat(document.getElementById("price").value) || 0;
+    if (!miles || !gallons) return;
+    var r = calcMPG(miles, gallons, price);
+
+    document.getElementById("mpg").textContent = fmt(r.mpg, 1);
+    document.getElementById("l100").textContent = fmt(r.l100, 1);
+    document.getElementById("kml").textContent = fmt(r.kml, 1);
+    document.getElementById("galUsed").textContent = fmt(gallons, 1) + " gal";
+    document.getElementById("totalCost").textContent = price > 0 ? money(r.totalCost) + " for this fill-up" : "Enter a fuel price to see cost";
+    document.getElementById("costMile").textContent = price > 0 ? money(r.costPerMile) : "—";
+
+    var rows = [
+      ["Miles driven", fmt(miles, 0) + " mi"],
+      ["Gallons used", fmt(gallons, 1) + " gal"],
+      ["Fuel per year (12,000 mi)", fmt(r.annualGallons, 0) + " gal"],
+      ["Fuel cost per year (12,000 mi)", price > 0 ? money(r.annualCost) : "—"]
+    ];
+    var box = document.getElementById("breakdownRows");
+    box.innerHTML = "";
+    rows.forEach(function(rw){
+      var div = document.createElement("div");
+      div.className = "b-row";
+      div.style.gridTemplateColumns = "1fr auto";
+      div.innerHTML = "<span>" + rw[0] + "</span><span class='mono' style='text-align:right'>" + rw[1] + "</span>";
+      box.appendChild(div);
+    });
+
+    var v = document.getElementById("verdict");
+    if (r.mpg >= 40){ v.className = "verdict good"; v.textContent = "Excellent — 40 MPG or more is very efficient for a petrol car."; }
+    else if (r.mpg >= 30){ v.className = "verdict good"; v.textContent = "Good — 30–40 MPG is a solid result for mixed driving."; }
+    else if (r.mpg >= 20){ v.className = "verdict warn"; v.textContent = "Average — 20–30 MPG is normal for larger cars and SUVs. Check tire pressure and driving style to improve it."; }
+    else { v.className = "verdict warn"; v.textContent = "Low — under 20 MPG is worth a look: check tire pressure, air filter and whether most trips are short city runs."; }
+  }
+
+  ["miles","gallons","price"].forEach(function(id){
+    document.getElementById(id).addEventListener("input", render);
+    document.getElementById(id).addEventListener("change", render);
+  });
+  render();
+  window.__test = { calcMPG: calcMPG };
+})();
+</script>
+</body>
+</html>
