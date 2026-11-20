@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Car Insurance Calculator — Estimate Cost</title>
+<meta name="description" content="Free car insurance calculator. Estimate your monthly and yearly premium by state, age, car value, coverage and driving record. No name, email or phone needed." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../assets/css/style.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Car Insurance Calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web browser",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Estimate car insurance cost by state, age, car value, coverage and driving record, with no personal information."
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#0e7c6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15a8 8 0 1 1 16 0"/><path d="M12 15l4.5-5"/><circle cx="12" cy="15" r="1.5" fill="#0e7c6b" stroke="none"/><path d="M3 19.5h18"/></svg></span>Car Owner <span>Tools</span></a>
+    <button class="nav-toggle" type="button" aria-label="Menu">Menu</button>
+    <nav class="site-nav" aria-label="Main navigation"><a href="../../">Home</a><a href="../../tools/tire-size-calculator/">Tire Size</a><a href="../../tools/mpg-calculator/">MPG</a><a href="../../tools/fuel-cost-calculator/">Fuel Cost</a><a href="../../tools/car-insurance-calculator/" class="active">Insurance</a><a href="../../tools/car-depreciation-calculator/">Depreciation</a><a href="../../tools/fuel-consumption-calculator/">Fuel Consumption</a><a href="../../blog/">Blog</a><a href="../../about/">About</a><a href="../../contact/">Contact</a></nav>
+  </div>
+</header>
+
+<section class="hero hero-tool"><div class="wrap">
+<p class="crumbs"><a href="../../">Home</a> &rsaquo; Car Insurance Calculator</p>
+<h1>Car Insurance Calculator</h1>
+<p class="lede">Estimate what car insurance might cost you — by state, age, car and driving record. No name, no email, no phone number. It is an estimate, not a quote.</p>
+<div class="hero-badges"><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6.5L9.5 17 4 11.5"/></svg>Free &amp; instant</span><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6.5L9.5 17 4 11.5"/></svg>No personal information</span><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6.5L9.5 17 4 11.5"/></svg>All 50 states</span></div>
+</div></section>
+<main class="wrap calc-shell"><div class="calc-grid">
+<div class="card form-card"><h2><span class="h2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 2.8v5.4c0 4.6-3 8.6-7 10.3-4-1.7-7-5.7-7-10.3V5.8L12 3z"/><path d="M9 11.8l2.2 2.2 4-4.2"/></svg></span>Your details</h2>
+<p class="sub">Nothing here leaves your browser. We never ask for your name, email, phone or ZIP code.</p>
+<div class="field"><label for="state">State</label><select id="state"><option value="AL">Alabama</option><option value="AK">Alaska</option><option value="AZ">Arizona</option><option value="AR">Arkansas</option><option value="CA">California</option><option value="CO">Colorado</option><option value="CT">Connecticut</option><option value="DE">Delaware</option><option value="DC">District of Columbia</option><option value="FL">Florida</option><option value="GA">Georgia</option><option value="HI">Hawaii</option><option value="ID">Idaho</option><option value="IL">Illinois</option><option value="IN">Indiana</option><option value="IA">Iowa</option><option value="KS">Kansas</option><option value="KY">Kentucky</option><option value="LA">Louisiana</option><option value="ME">Maine</option><option value="MD">Maryland</option><option value="MA">Massachusetts</option><option value="MI">Michigan</option><option value="MN">Minnesota</option><option value="MS">Mississippi</option><option value="MO">Missouri</option><option value="MT">Montana</option><option value="NE">Nebraska</option><option value="NV">Nevada</option><option value="NH">New Hampshire</option><option value="NJ">New Jersey</option><option value="NM">New Mexico</option><option value="NY">New York</option><option value="NC">North Carolina</option><option value="ND">North Dakota</option><option value="OH">Ohio</option><option value="OK">Oklahoma</option><option value="OR">Oregon</option><option value="PA">Pennsylvania</option><option value="RI">Rhode Island</option><option value="SC">South Carolina</option><option value="SD">South Dakota</option><option value="TN">Tennessee</option><option value="TX" selected>Texas</option><option value="UT">Utah</option><option value="VT">Vermont</option><option value="VA">Virginia</option><option value="WA">Washington</option><option value="WV">West Virginia</option><option value="WI">Wisconsin</option><option value="WY">Wyoming</option></select></div>
+<div class="two">
+<div class="field"><label for="age">Your age</label>
+<input type="number" id="age" min="16" max="99" step="1" value="35" />
+<span class="hint">Drivers under 25 pay the most.</span></div>
+<div class="field"><label for="carYear">Car year</label><select id="carYear"></select>
+<span class="hint">Newer cars cost more to insure.</span></div></div>
+<div class="field"><label for="carValue">Car value ($)</label>
+<input type="number" id="carValue" min="1000" max="200000" step="500" value="25000" />
+<span class="hint">Roughly what your car is worth today.</span></div>
+<div class="field"><label>Coverage</label><div class="seg" id="covSeg">
+<button type="button" data-v="full" aria-pressed="true">Full coverage</button>
+<button type="button" data-v="liability" aria-pressed="false">Liability only</button>
+</div><span class="hint">Full coverage adds collision and comprehensive cover on top of liability.</span></div>
+<div class="field"><label>Driving record</label><div class="seg" id="recSeg">
+<button type="button" data-v="1" aria-pressed="true">Clean</button>
+<button type="button" data-v="1.2" aria-pressed="false">1 ticket</button>
+<button type="button" data-v="1.35" aria-pressed="false">1 accident</button>
+<button type="button" data-v="1.85" aria-pressed="false">DUI</button>
+</div></div>
+<div class="field"><label>Annual miles</label><div class="seg3" id="milesSeg">
+<button type="button" data-v="0.9" aria-pressed="false">Under 7,500</button>
+<button type="button" data-v="1" aria-pressed="true">7,500&ndash;15,000</button>
+<button type="button" data-v="1.1" aria-pressed="false">Over 15,000</button>
+</div></div>
+</div>
+<div class="card result-card" aria-live="polite"><span class="result-label">Your result &middot; updates as you type</span><h2>Your estimated premium</h2>
+<div class="big-num"><span id="monthly">&mdash;</span><small> / month</small></div>
+<p class="range-line"><strong id="yearly">&mdash;</strong> per year &middot; likely range <strong id="range">&mdash;</strong> / month</p>
+<div class="vs"><div class="vs-box"><div class="t">Coverage</div><div class="v" id="covOut">&mdash;</div><div class="y" id="stateOut">&mdash;</div></div>
+<div class="vs-box"><div class="t">Biggest factor</div><div class="v" id="bigFactor">&mdash;</div><div class="y">what raises your price most</div></div></div>
+<div class="breakdown"><h3>How the estimate is built</h3><div id="breakdownRows"></div></div>
+<div class="verdict good" id="verdict">&mdash;</div>
+<p class="note">This is an estimate for comparison only, not an insurance quote. Actual premiums also depend on your ZIP code, insurer, credit history and exact car model. Base rates: $1,900 a year for full coverage, $650 for liability only (US average level), adjusted for state, age, car age and value, driving record and mileage.</p>
+</div></div>
+<section class="block"><h2>Average car insurance cost by state</h2>
+<p class="intro">Full coverage, clean record, driver aged 40, car from 2021 worth about $25,000. Your state is highlighted.</p>
+<div class="tables"><div class="table-card"><h3>Most expensive states</h3><p>Full coverage, per year (estimate)</p>
+<table><tr><th>State</th><th class="num">Per year</th></tr>
+<tr><td>Florida</td><td class="num">$3,093</td></tr><tr><td>Louisiana</td><td class="num">$3,031</td></tr>
+<tr><td>Michigan</td><td class="num">$2,968</td></tr><tr><td>New York</td><td class="num">$2,884</td></tr>
+<tr><td>Nevada</td><td class="num">$2,717</td></tr></table></div>
+<div class="table-card"><h3>Cheapest states</h3><p>Full coverage, per year (estimate)</p>
+<table><tr><th>State</th><th class="num">Per year</th></tr>
+<tr><td>Vermont</td><td class="num">$1,359</td></tr><tr><td>Maine</td><td class="num">$1,421</td></tr>
+<tr><td>Idaho</td><td class="num">$1,463</td></tr><tr><td>Iowa</td><td class="num">$1,630</td></tr>
+<tr><td>New Hampshire</td><td class="num">$1,630</td></tr></table></div></div></section>
+<section class="block"><h2>What affects your rate most?</h2>
+<p class="intro">Seven factors, in roughly the order insurers weigh them.</p>
+<div class="factors">
+<div class="factor"><span class="impact">UP TO +85%</span><h3>Driving record</h3><p>A DUI can almost double a premium; one accident adds about a third. A clean record is the cheapest discount there is.</p></div>
+<div class="factor"><span class="impact">UP TO +60%</span><h3>Age</h3><p>Drivers under 25 pay the most, because insurers see more claims from young drivers. Rates usually fall sharply after 25.</p></div>
+<div class="factor"><span class="impact">STATE VARIES 2&times;</span><h3>Where you live</h3><p>Full coverage in Michigan can cost roughly twice as much as in Vermont, driven by local repair costs, theft and claim rates.</p></div>
+<div class="factor"><span class="impact">FULL VS LIABILITY</span><h3>Coverage level</h3><p>Full coverage costs roughly three times liability-only cover, because it also pays for damage to your own car.</p></div>
+<div class="factor"><span class="impact">UP TO +25%</span><h3>Car value</h3><p>A more expensive car costs more to repair or replace, so it costs more to insure. Older, cheaper cars are cheaper to cover.</p></div>
+<div class="factor"><span class="impact">UP TO +10%</span><h3>Annual miles</h3><p>More miles means more time on the road and more risk. Low-mileage drivers often pay less.</p></div>
+</div></section>
+<section class="block"><h2>Frequently asked questions</h2>
+<details><summary>Can I calculate car insurance without personal information?</summary><p>Yes — this calculator only needs your state, age group, car details, coverage and driving record. No name, email, phone number or ZIP code is needed for an estimate.</p></details>
+<details><summary>Is this a real insurance quote?</summary><p>No. It is an estimate built from published US average rates and typical adjustment factors. A real quote from an insurer will also use your ZIP code, exact car model and credit history, so it can be higher or lower.</p></details>
+<details><summary>Why is insurance so expensive for young drivers?</summary><p>Insurers price on claim statistics, and drivers under 25 have far more accidents per mile than older drivers. The surcharge usually drops a lot at 25 and keeps falling with a clean record.</p></details>
+<details><summary>What is the difference between liability and full coverage?</summary><p>Liability only pays for damage and injuries you cause to other people. Full coverage adds collision (damage to your own car in a crash) and comprehensive (theft, fire, weather and similar events).</p></details>
+<details><summary>How can I lower my premium?</summary><p>Keep a clean record, compare quotes from several insurers, raise your deductible, ask about low-mileage and safe-driver discounts, and bundle home and auto cover if you can.</p></details>
+</section>
+<div class="related"><h2>Related tools</h2><ul><li><a href="../mpg-calculator/">MPG Calculator<span>Work out your real MPG</span></a></li><li><a href="../car-depreciation-calculator/">Car Depreciation Calculator<span>What is your car worth now?</span></a></li><li><a href="../fuel-cost-calculator/">Fuel Cost Calculator<span>Plan the cost of any trip</span></a></li></ul></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="cols">
+      <div><div class="footer-brand"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#0e7c6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15a8 8 0 1 1 16 0"/><path d="M12 15l4.5-5"/><circle cx="12" cy="15" r="1.5" fill="#0e7c6b" stroke="none"/><path d="M3 19.5h18"/></svg></span>Car Owner <span>Tools</span></div><p>Free calculators for car owners: tires, fuel economy, insurance and car value. No signup, no personal information.</p></div>
+      <div><h4>Tools</h4><ul><li><a href="../../tools/tire-size-calculator/">Tire Size Calculator</a></li><li><a href="../../tools/mpg-calculator/">MPG Calculator</a></li><li><a href="../../tools/fuel-cost-calculator/">Fuel Cost Calculator</a></li><li><a href="../../tools/car-insurance-calculator/">Car Insurance Calculator</a></li><li><a href="../../tools/car-depreciation-calculator/">Car Depreciation Calculator</a></li><li><a href="../../tools/fuel-consumption-calculator/">Fuel Consumption Calculator</a></li></ul></div>
+      <div><h4>Site</h4><ul>
+        <li><a href="../../blog/">Blog</a></li>
+        <li><a href="../../about/">About</a></li>
+        <li><a href="../../contact/">Contact</a></li>
+        <li><a href="../../privacy-policy/">Privacy Policy</a></li>
+      </ul></div>
+    </div>
+    <p class="disc"><strong>Disclaimer:</strong> Results are estimates for education and comparison only. They are not insurance quotes, offers or financial advice. Always confirm prices with a licensed insurer before making a decision.</p>
+    <p class="copy">&copy; <span id="year">2026</span> Car Owner Tools. All rights reserved.</p>
+  </div>
+</footer>
+<script src="../../assets/js/site.js"></script>
+
+<script>
+(function(){
+  "use strict";
+  var STATE = {"AL": 1.02, "AK": 0.95, "AZ": 1.08, "AR": 1.05, "CA": 1.25, "CO": 1.12, "CT": 1.10, "DE": 1.18, "DC": 1.20, "FL": 1.48, "GA": 1.12, "HI": 0.82, "ID": 0.70, "IL": 0.98, "IN": 0.92, "IA": 0.78, "KS": 0.92, "KY": 1.18, "LA": 1.45, "ME": 0.68, "MD": 1.08, "MA": 0.95, "MI": 1.42, "MN": 0.95, "MS": 1.02, "MO": 1.05, "MT": 0.90, "NE": 0.92, "NV": 1.30, "NH": 0.78, "NJ": 1.15, "NM": 1.02, "NY": 1.38, "NC": 0.88, "ND": 0.85, "OH": 0.85, "OK": 1.05, "OR": 1.02, "PA": 1.00, "RI": 1.12, "SC": 1.05, "SD": 0.85, "TN": 0.95, "TX": 1.15, "UT": 1.02, "VT": 0.65, "VA": 0.88, "WA": 1.02, "WV": 0.95, "WI": 0.88, "WY": 0.85};
+  var coverage = "full", record = 1.0, milesF = 1.0;
+  function ageFactor(age){ if (age <= 24) return 1.60; if (age <= 40) return 1.10; if (age <= 65) return 1.00; return 1.15; }
+  function carAgeFactor(yr){ if (yr >= 2023) return 1.10; if (yr >= 2018) return 1.00; if (yr >= 2010) return 0.92; return 0.85; }
+  function valueFactor(v){ if (v < 15000) return 0.85; if (v <= 35000) return 1.00; if (v <= 50000) return 1.12; return 1.25; }
+  function calcInsurance(state, age, year, carValue, cov, recF, miles){
+    var base = (cov === "full") ? 1900 : 650;
+    var vf = (cov === "full") ? valueFactor(carValue) : 1.0;
+    var cf = (cov === "full") ? carAgeFactor(year) : 1.0;
+    var annual = base * STATE[state] * ageFactor(age) * cf * vf * recF * miles;
+    return { annual: annual, monthly: annual / 12, low: annual * 0.88 / 12, high: annual * 1.15 / 12,
+             stateF: STATE[state], ageF: ageFactor(age), yearF: cf, valueF: vf };
+  }
+  function money(n){ return "$" + n.toLocaleString("en-US", {minimumFractionDigits: 0, maximumFractionDigits: 0}); }
+  function money2(n){ return "$" + n.toLocaleString("en-US", {minimumFractionDigits: 2, maximumFractionDigits: 2}); }
+  function render(){
+    var state = document.getElementById("state").value;
+    var age = parseInt(document.getElementById("age").value, 10) || 35;
+    var year = parseInt(document.getElementById("carYear").value, 10) || 2021;
+    var carValue = parseFloat(document.getElementById("carValue").value) || 25000;
+    var r = calcInsurance(state, age, year, carValue, coverage, record, milesF);
+    document.getElementById("monthly").textContent = money(r.monthly);
+    document.getElementById("yearly").textContent = money(r.annual);
+    document.getElementById("range").textContent = money(r.low) + " \u2013 " + money(r.high);
+    document.getElementById("covOut").textContent = coverage === "full" ? "Full coverage" : "Liability only";
+    document.getElementById("stateOut").textContent = document.getElementById("state").selectedOptions[0].text;
+    var factors = [["State", r.stateF], ["Age", r.ageF], ["Car age", r.yearF], ["Car value", r.valueF], ["Driving record", record], ["Miles", milesF]];
+    factors.sort(function(a, b){ return b[1] - a[1]; });
+    document.getElementById("bigFactor").textContent = factors[0][0] + " \u00d7" + factors[0][1].toFixed(2);
+    var rows = [["Base rate (" + (coverage === "full" ? "full coverage" : "liability only") + ")", money(coverage === "full" ? 1900 : 650) + " / yr"],
+      ["State factor", "\u00d7" + r.stateF.toFixed(2)], ["Age " + age + " factor", "\u00d7" + r.ageF.toFixed(2)],
+      ["Car age factor", "\u00d7" + r.yearF.toFixed(2)], ["Car value factor", "\u00d7" + r.valueF.toFixed(2)],
+      ["Driving record", "\u00d7" + record.toFixed(2)], ["Mileage factor", "\u00d7" + milesF.toFixed(2)]];
+    var box = document.getElementById("breakdownRows"); box.innerHTML = "";
+    rows.forEach(function(rw){ var div = document.createElement("div"); div.className = "b-row";
+      div.style.gridTemplateColumns = "1fr auto";
+      div.innerHTML = "<span>" + rw[0] + "</span><span class='mono' style='text-align:right'>" + rw[1] + "</span>";
+      box.appendChild(div); });
+    var v = document.getElementById("verdict");
+    if (record >= 1.85){ v.className = "verdict bad"; v.textContent = "A DUI is the single biggest cost here \u2014 it almost doubles the premium. Rates usually improve after several clean years."; }
+    else if (r.monthly <= 150){ v.className = "verdict good"; v.textContent = "Below the US average \u2014 this profile is relatively cheap to insure."; }
+    else if (r.monthly <= 250){ v.className = "verdict good"; v.textContent = "Around the US average for full coverage. Comparing quotes from 3 insurers is still worth doing."; }
+    else { v.className = "verdict warn"; v.textContent = "Above average \u2014 the biggest lever is usually your driving record and your state. Shop around: quotes for the same driver can differ by hundreds of dollars a year."; }
+  }
+  var yearSel = document.getElementById("carYear");
+  for (var y = 2026; y >= 2000; y--){ var o = document.createElement("option"); o.value = y; o.textContent = y; yearSel.appendChild(o); }
+  yearSel.value = "2021";
+  function seg(id, fn){
+    document.querySelectorAll("#" + id + " button").forEach(function(b){
+      b.addEventListener("click", function(){
+        document.querySelectorAll("#" + id + " button").forEach(function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+        fn(b); render();
+      });
+    });
+  }
+  seg("covSeg", function(b){ coverage = b.getAttribute("data-v"); });
+  seg("recSeg", function(b){ record = parseFloat(b.getAttribute("data-v")); });
+  seg("milesSeg", function(b){ milesF = parseFloat(b.getAttribute("data-v")); });
+  ["state","age","carYear","carValue"].forEach(function(id){
+    document.getElementById(id).addEventListener("input", render);
+    document.getElementById(id).addEventListener("change", render);
+  });
+  render();
+  window.__test = { calcInsurance: calcInsurance, valueFactor: valueFactor };
+})();
+</script>
+</body>
+</html>
