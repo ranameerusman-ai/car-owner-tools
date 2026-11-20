@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fuel Consumption Calculator — MPG to L/100km</title>
+<meta name="description" content="Free fuel consumption calculator. Convert MPG, L/100km and km/L, work out consumption from a trip, or price the trip." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../assets/css/style.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Fuel Consumption Calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web browser",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Convert fuel consumption between MPG, L/100km and km/L, or calculate it from a trip."
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#0e7c6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15a8 8 0 1 1 16 0"/><path d="M12 15l4.5-5"/><circle cx="12" cy="15" r="1.5" fill="#0e7c6b" stroke="none"/><path d="M3 19.5h18"/></svg></span>Car Owner <span>Tools</span></a>
+    <button class="nav-toggle" type="button" aria-label="Menu">Menu</button>
+    <nav class="site-nav" aria-label="Main navigation"><a href="../../">Home</a><a href="../../tools/tire-size-calculator/">Tire Size</a><a href="../../tools/mpg-calculator/">MPG</a><a href="../../tools/fuel-cost-calculator/">Fuel Cost</a><a href="../../tools/car-insurance-calculator/">Insurance</a><a href="../../tools/car-depreciation-calculator/">Depreciation</a><a href="../../tools/fuel-consumption-calculator/" class="active">Fuel Consumption</a><a href="../../blog/">Blog</a><a href="../../about/">About</a><a href="../../contact/">Contact</a></nav>
+  </div>
+</header>
+
+<section class="hero hero-tool"><div class="wrap">
+<p class="crumbs"><a href="../../">Home</a> &rsaquo; Fuel Consumption Calculator</p>
+<h1>Fuel Consumption Calculator</h1>
+<p class="lede">Buying a car abroad, or comparing a US MPG figure with a European L/100km one? Enter your trip and get the answer in every unit.</p>
+<div class="hero-badges"><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6.5L9.5 17 4 11.5"/></svg>Free &amp; instant</span><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6.5L9.5 17 4 11.5"/></svg>No personal information</span><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6.5L9.5 17 4 11.5"/></svg>US, UK &amp; metric</span></div>
+</div></section>
+<main class="wrap calc-shell"><div class="calc-grid">
+<div class="card form-card"><h2><span class="h2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s6.5 6.8 6.5 11.2a6.5 6.5 0 1 1-13 0C5.5 9.8 12 3 12 3z"/><path d="M9.3 14.2a2.7 2.7 0 0 0 2.7 2.7"/></svg></span>Your trip</h2>
+<p class="sub">Use the same full-tank method as the <a href="../mpg-calculator/">MPG Calculator</a>: fill up, drive, fill up again.</p>
+<div class="two">
+<div class="field"><label for="distance">Distance</label>
+<input type="number" id="distance" min="1" max="100000" step="1" value="300" /></div>
+<div class="field"><label for="distUnit">Distance unit</label><select id="distUnit">
+<option value="mi" selected>Miles</option><option value="km">Kilometres</option></select></div></div>
+<div class="two">
+<div class="field"><label for="fuel">Fuel used</label>
+<input type="number" id="fuel" min="0.1" max="10000" step="0.1" value="10" /></div>
+<div class="field"><label for="fuelUnit">Fuel unit</label><select id="fuelUnit">
+<option value="gal" selected>US gallons</option><option value="ukgal">UK gallons</option><option value="L">Litres</option></select></div></div>
+<div class="field"><label>Or convert a figure directly</label><div class="two">
+<input type="number" id="convertVal" min="0.1" max="500" step="0.1" placeholder="e.g. 30" />
+<select id="convertUnit"><option value="mpg-us">MPG (US)</option><option value="mpg-uk">MPG (UK)</option>
+<option value="l100">L / 100 km</option><option value="kml">km / litre</option></select></div>
+<span class="hint">Leave blank to use the trip above. Entering a value here switches to conversion mode.</span></div>
+<div class="field"><label>Trip cost</label><div class="two">
+<input type="number" id="tripDist" min="1" max="100000" step="1" value="300" />
+<select id="tripDistUnit"><option value="mi" selected>Miles</option><option value="km">Kilometres</option></select></div>
+<div class="two" style="margin-top:10px">
+<input type="number" id="tripPrice" min="0" max="50" step="0.01" value="3.50" />
+<select id="tripPriceUnit"><option value="gal" selected>$ per US gallon</option><option value="L">$ per litre</option></select></div>
+<span class="hint">Uses the consumption above to work out what a trip of this distance costs.</span></div>
+</div>
+<div class="card result-card" aria-live="polite"><span class="result-label">Your result &middot; updates as you type</span><h2>Your fuel consumption</h2>
+<div class="big-num"><span id="mainVal">&mdash;</span><small id="mainUnit"> MPG (US)</small></div>
+<p class="range-line">Also <strong id="alt1">&mdash;</strong> &middot; <strong id="alt2">&mdash;</strong></p>
+<div class="vs"><div class="vs-box"><div class="t">L / 100 km</div><div class="v" id="l100">&mdash;</div><div class="y">lower is better</div></div>
+<div class="vs-box"><div class="t">km per litre</div><div class="v" id="kml">&mdash;</div><div class="y">higher is better</div></div></div>
+<div class="breakdown"><h3>All units</h3><div id="breakdownRows"></div></div>
+<div class="verdict good" id="verdict">&mdash;</div>
+<p class="note">Conversions: L/100km = 235.214 &divide; MPG (US). MPG (UK) = MPG (US) &times; 1.201. km/L = 100 &divide; L/100km. 1 US gallon = 3.785 litres; 1 UK gallon = 4.546 litres.</p>
+</div></div>
+<section class="block"><h2>What do the numbers mean?</h2>
+<p class="intro">Different countries measure the same thing in opposite ways — which is why comparing cars across borders is confusing.</p>
+<div class="factors">
+<div class="factor"><span class="impact">USA</span><h3>MPG — higher is better</h3><p>Miles per gallon: how far you go on one gallon. A bigger number means a more efficient car.</p></div>
+<div class="factor"><span class="impact">EUROPE</span><h3>L/100km — lower is better</h3><p>Litres per 100 kilometres: how much fuel you use for a fixed distance. A smaller number means a more efficient car.</p></div>
+<div class="factor"><span class="impact">UK TRAP</span><h3>UK vs US gallons</h3><p>A UK gallon is about 20% bigger than a US gallon, so the same car shows a higher MPG number in the UK. Always check which gallon a figure uses.</p></div>
+<div class="factor"><span class="impact">GUIDE</span><h3>What is good?</h3><p>30 MPG (US) is about 7.8 L/100km. 40 MPG is about 5.9 L/100km. Hybrids often beat 50 MPG, or under 4.7 L/100km.</p></div>
+<div class="factor"><span class="impact">CITY VS MOTORWAY</span><h3>One number hides a lot</h3><p>City driving uses far more fuel than motorway cruising. Compare figures measured the same way.</p></div>
+<div class="factor"><span class="impact">WHY IT MATTERS</span><h3>Fuel cost follows it</h3><p>A car at 20 MPG costs twice as much in fuel per mile as one at 40 MPG. Small differences add up to hundreds of dollars a year.</p></div>
+</div></section>
+<section class="block"><h2>Frequently asked questions</h2>
+<details><summary>How do I convert MPG to L/100km?</summary><p>Divide 235.214 by the MPG figure. For example, 30 MPG (US) is 235.214 &divide; 30 = 7.8 L/100km. This calculator does it for you.</p></details>
+<details><summary>Why is UK MPG higher than US MPG for the same car?</summary><p>Because a UK (imperial) gallon is 4.546 litres while a US gallon is 3.785 litres — about 20% bigger. The same distance on the same fuel gives a UK MPG figure about 1.2 times the US one.</p></details>
+<details><summary>What is a good L/100km?</summary><p>Under 6 L/100km is good for a petrol car, under 5 is very good, and hybrids often manage under 4.5. Large SUVs and trucks are usually 10 L/100km or more.</p></details>
+<details><summary>Can I use this for diesel or electric cars?</summary><p>Yes for diesel — the maths is the same. For electric cars the equivalent is kWh per 100 km, which is a different unit, so use the trip figures only as a rough comparison.</p></details>
+</section>
+<div class="related"><h2>Related tools</h2><ul><li><a href="../mpg-calculator/">MPG Calculator<span>Work out your real MPG</span></a></li><li><a href="../fuel-cost-calculator/">Fuel Cost Calculator<span>Plan the cost of any trip</span></a></li><li><a href="../tire-size-calculator/">Tire Size Calculator<span>Compare tire sizes before you buy</span></a></li></ul></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="cols">
+      <div><div class="footer-brand"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#0e7c6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15a8 8 0 1 1 16 0"/><path d="M12 15l4.5-5"/><circle cx="12" cy="15" r="1.5" fill="#0e7c6b" stroke="none"/><path d="M3 19.5h18"/></svg></span>Car Owner <span>Tools</span></div><p>Free calculators for car owners: tires, fuel economy, insurance and car value. No signup, no personal information.</p></div>
+      <div><h4>Tools</h4><ul><li><a href="../../tools/tire-size-calculator/">Tire Size Calculator</a></li><li><a href="../../tools/mpg-calculator/">MPG Calculator</a></li><li><a href="../../tools/fuel-cost-calculator/">Fuel Cost Calculator</a></li><li><a href="../../tools/car-insurance-calculator/">Car Insurance Calculator</a></li><li><a href="../../tools/car-depreciation-calculator/">Car Depreciation Calculator</a></li><li><a href="../../tools/fuel-consumption-calculator/">Fuel Consumption Calculator</a></li></ul></div>
+      <div><h4>Site</h4><ul>
+        <li><a href="../../blog/">Blog</a></li>
+        <li><a href="../../about/">About</a></li>
+        <li><a href="../../contact/">Contact</a></li>
+        <li><a href="../../privacy-policy/">Privacy Policy</a></li>
+      </ul></div>
+    </div>
+    <p class="disc"><strong>Disclaimer:</strong> Results are estimates for education and comparison only. Actual fuel consumption varies with driving conditions and vehicle condition.</p>
+    <p class="copy">&copy; <span id="year">2026</span> Car Owner Tools. All rights reserved.</p>
+  </div>
+</footer>
+<script src="../../assets/js/site.js"></script>
+
+<script>
+(function(){
+  "use strict";
+  function toL100(mpgUS){ return 235.214 / mpgUS; }
+  function fromL100(l100){ return { mpgUS: 235.214 / l100, mpgUK: 235.214 / l100 * 1.20095, l100: l100, kml: 100 / l100 }; }
+  function calcConsumption(distance, distUnit, fuel, fuelUnit){
+    var km = distUnit === "km" ? distance : distance * 1.60934;
+    var litres = fuelUnit === "L" ? fuel : (fuelUnit === "ukgal" ? fuel * 4.54609 : fuel * 3.78541);
+    var l100 = litres / km * 100;
+    return fromL100(l100);
+  }
+  function convertValue(val, unit){
+    if (unit === "mpg-us") return fromL100(235.214 / val);
+    if (unit === "mpg-uk") return fromL100(235.214 / (val / 1.20095));
+    if (unit === "l100") return fromL100(val);
+    return fromL100(100 / val); // km/L
+  }
+  function money2(n){ return "$" + n.toLocaleString("en-US", {minimumFractionDigits: 2, maximumFractionDigits: 2}); }
+  function calcTripCost(r, tripDist, tripDistUnit, tripPrice, tripPriceUnit){
+    if (tripPriceUnit === "gal"){
+      var miles = tripDistUnit === "mi" ? tripDist : tripDist / 1.60934;
+      var gal = miles / r.mpgUS;
+      return { fuel: gal, fuelLabel: "US gal", cost: gal * tripPrice };
+    }
+    var km = tripDistUnit === "km" ? tripDist : tripDist * 1.60934;
+    var litres = km * r.l100 / 100;
+    return { fuel: litres, fuelLabel: "litres", cost: litres * tripPrice };
+  }
+  function fmt(n, d){ return n.toLocaleString("en-US", {minimumFractionDigits: d, maximumFractionDigits: d}); }
+  function render(){
+    var cv = parseFloat(document.getElementById("convertVal").value);
+    var r;
+    if (cv){
+      r = convertValue(cv, document.getElementById("convertUnit").value);
+      document.getElementById("mainUnit").textContent = " MPG (US) \u2014 converted";
+    } else {
+      var distance = parseFloat(document.getElementById("distance").value) || 0;
+      var fuel = parseFloat(document.getElementById("fuel").value) || 0;
+      if (!distance || !fuel) return;
+      r = calcConsumption(distance, document.getElementById("distUnit").value, fuel, document.getElementById("fuelUnit").value);
+      document.getElementById("mainUnit").textContent = " MPG (US)";
+    }
+    document.getElementById("mainVal").textContent = fmt(r.mpgUS, 1);
+    document.getElementById("alt1").textContent = fmt(r.mpgUK, 1) + " MPG (UK)";
+    document.getElementById("alt2").textContent = fmt(r.l100, 1) + " L/100km";
+    document.getElementById("l100").textContent = fmt(r.l100, 1);
+    document.getElementById("kml").textContent = fmt(r.kml, 1);
+    var rows = [["MPG (US)", fmt(r.mpgUS, 1)], ["MPG (UK)", fmt(r.mpgUK, 1)],
+      ["L / 100 km", fmt(r.l100, 1)], ["km / litre", fmt(r.kml, 1)]];
+    var tripDist = parseFloat(document.getElementById("tripDist").value) || 0;
+    var tripPrice = parseFloat(document.getElementById("tripPrice").value) || 0;
+    if (tripDist && tripPrice){
+      var tc = calcTripCost(r, tripDist, document.getElementById("tripDistUnit").value, tripPrice, document.getElementById("tripPriceUnit").value);
+      rows.push(["Trip fuel needed", fmt(tc.fuel, 1) + " " + tc.fuelLabel]);
+      rows.push(["Trip cost", money2(tc.cost)]);
+    }
+    var box = document.getElementById("breakdownRows"); box.innerHTML = "";
+    rows.forEach(function(rw){ var div = document.createElement("div"); div.className = "b-row";
+      div.style.gridTemplateColumns = "1fr auto";
+      div.innerHTML = "<span>" + rw[0] + "</span><span class='mono' style='text-align:right'>" + rw[1] + "</span>";
+      box.appendChild(div); });
+    var v = document.getElementById("verdict");
+    if (r.mpgUS >= 40){ v.className = "verdict good"; v.textContent = "Excellent \u2014 40 MPG or more is very efficient."; }
+    else if (r.mpgUS >= 30){ v.className = "verdict good"; v.textContent = "Good \u2014 30\u201340 MPG is a solid result for a petrol car."; }
+    else if (r.mpgUS >= 20){ v.className = "verdict warn"; v.textContent = "Average \u2014 20\u201330 MPG is normal for larger cars and SUVs."; }
+    else { v.className = "verdict warn"; v.textContent = "Low \u2014 under 20 MPG is worth a look: tire pressure, air filter and short city trips are the usual causes."; }
+  }
+  ["distance","distUnit","fuel","fuelUnit","convertVal","convertUnit","tripDist","tripDistUnit","tripPrice","tripPriceUnit"].forEach(function(id){
+    document.getElementById(id).addEventListener("input", render);
+    document.getElementById(id).addEventListener("change", render);
+  });
+  render();
+  window.__test = { calcConsumption: calcConsumption, convertValue: convertValue, calcTripCost: calcTripCost };
+})();
+</script>
+</body>
+</html>
