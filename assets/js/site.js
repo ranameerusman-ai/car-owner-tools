@@ -50,4 +50,67 @@
   /* Footer year */
   var year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
+
+  /* Theme switch: header toggle + homepage popup, remembers the choice */
+  var rootEl = document.documentElement;
+  var themeBtn = document.querySelector(".theme-toggle");
+  var themeFab = document.getElementById("themeFab");
+  var themePop = document.getElementById("themePop");
+  var themeOpts = document.querySelectorAll(".theme-opt");
+  var savedTheme = null;
+  try { savedTheme = localStorage.getItem("calcforcars-theme"); } catch (e) {}
+  var currentTheme = rootEl.getAttribute("data-theme") || savedTheme || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  function applyTheme(t) {
+    rootEl.setAttribute("data-theme", t);
+    try { localStorage.setItem("calcforcars-theme", t); } catch (e) {}
+    var dark = t === "dark";
+    if (themeBtn) {
+      themeBtn.setAttribute("aria-pressed", dark ? "true" : "false");
+      themeBtn.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+    }
+    themeOpts.forEach(function (opt) {
+      var active = opt.getAttribute("data-theme-choice") === t;
+      opt.classList.toggle("active", active);
+      opt.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+  }
+  function closeThemePop() {
+    if (themePop) themePop.classList.remove("open");
+    if (themeFab) themeFab.setAttribute("aria-expanded", "false");
+    try { localStorage.setItem("calcforcars-theme-pop-seen", "1"); } catch (e) {}
+  }
+  function openThemePop() {
+    if (!themePop) return;
+    themePop.classList.add("open");
+    if (themeFab) themeFab.setAttribute("aria-expanded", "true");
+  }
+  applyTheme(currentTheme);
+  if (themeBtn) {
+    themeBtn.addEventListener("click", function () {
+      applyTheme(rootEl.getAttribute("data-theme") === "dark" ? "light" : "dark");
+    });
+  }
+  if (themeFab && themePop) {
+    themeFab.addEventListener("click", function () {
+      if (themePop.classList.contains("open")) closeThemePop();
+      else openThemePop();
+    });
+    themeOpts.forEach(function (opt) {
+      opt.addEventListener("click", function () {
+        applyTheme(opt.getAttribute("data-theme-choice"));
+        closeThemePop();
+      });
+    });
+    var popClose = themePop.querySelector(".theme-pop-close");
+    if (popClose) popClose.addEventListener("click", closeThemePop);
+    document.addEventListener("click", function (e) {
+      if (themePop.classList.contains("open") && !themePop.contains(e.target) && e.target !== themeFab && !themeFab.contains(e.target)) closeThemePop();
+    });
+    /* First visit on the homepage: pop up once from below */
+    var popSeen = null;
+    try { popSeen = localStorage.getItem("calcforcars-theme-pop-seen"); } catch (e) {}
+    if (!popSeen && !savedTheme) {
+      setTimeout(openThemePop, 700);
+    }
+  }
 })();
