@@ -51,9 +51,8 @@
   var year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 
-  /* Theme switch: header toggle + homepage popup, remembers the choice */
+  /* Theme switch: homepage popup (one button), remembers the choice */
   var rootEl = document.documentElement;
-  var themeBtn = document.querySelector(".theme-toggle");
   var themeFab = document.getElementById("themeFab");
   var themePop = document.getElementById("themePop");
   var themeOpts = document.querySelectorAll(".theme-opt");
@@ -64,10 +63,6 @@
     rootEl.setAttribute("data-theme", t);
     try { localStorage.setItem("calcforcars-theme", t); } catch (e) {}
     var dark = t === "dark";
-    if (themeBtn) {
-      themeBtn.setAttribute("aria-pressed", dark ? "true" : "false");
-      themeBtn.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
-    }
     themeOpts.forEach(function (opt) {
       var active = opt.getAttribute("data-theme-choice") === t;
       opt.classList.toggle("active", active);
@@ -85,11 +80,6 @@
     if (themeFab) themeFab.setAttribute("aria-expanded", "true");
   }
   applyTheme(currentTheme);
-  if (themeBtn) {
-    themeBtn.addEventListener("click", function () {
-      applyTheme(rootEl.getAttribute("data-theme") === "dark" ? "light" : "dark");
-    });
-  }
   if (themeFab && themePop) {
     themeFab.addEventListener("click", function () {
       if (themePop.classList.contains("open")) closeThemePop();
